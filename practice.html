@@ -88,8 +88,13 @@ function deviceId() {
 }
 async function call(path, body) {
   const token = await auth.currentUser.getIdToken();
-  let r; try { r = await fetch(API + path, { method: 'POST', headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' }, body: JSON.stringify({ deviceId: deviceId(), ...body }) }); }
-  catch { return { status: 0, error: 'Could not reach Qanun. Check your internet connection and try again.' }; }
+  // A brand-new browser's first request can fail before the server answers; trying again a moment later works, so do it quietly.
+  let r;
+  for (let tries = 0; tries < 3 && !r; tries++) {
+    try { r = await fetch(API + path, { method: 'POST', headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' }, body: JSON.stringify({ deviceId: deviceId(), ...body }) }); }
+    catch { if (tries < 2) await new Promise((ok) => setTimeout(ok, 700 * (tries + 1))); }
+  }
+  if (!r) return { status: 0, error: 'Could not reach Qanun (' + path.replace('/v1/', '') + '). Check your internet connection and try again.' };
   let j = {}; try { j = await r.json(); } catch {}
   return { status: r.status, ...j };
 }
