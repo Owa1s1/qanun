@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free daily questions · Qanun</title>
+<meta name="description" content="Try Qanun on the web: 10 free medical exam questions a day with full explanations. Sign in with Google.">
+<link rel="icon" href="icon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root { --ok: #1F8A4C; --okbg: #E4F4EA; --bad: #B3402E; --badbg: #FBEAE6; }
+  @media (prefers-color-scheme: dark) { :root { --ok: #5CCB8A; --okbg: #12372A; --bad: #F08A78; --badbg: #3C1F1A; } }
+  main { max-width: 760px; margin: 0 auto; padding: 22px 16px 60px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+  .top { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 14px; color: var(--sub); font-size: 14px; }
+  .chip { display: inline-block; padding: 3px 10px; border: 1px solid var(--line); border-radius: 99px; font-size: 13px; color: var(--sub); }
+  .stem { font-size: 17px; margin: 0 0 10px; }
+  .lead { font-weight: 600; margin: 0 0 14px; }
+  .opts { display: grid; gap: 10px; }
+  .opt { display: flex; gap: 12px; text-align: left; width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--card); color: var(--text); font: inherit; cursor: pointer; }
+  .opt .L { flex: none; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center; font-size: 13px; font-weight: 600; color: var(--sub); }
+  .opt.sel { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent) inset; }
+  .opt.sel .L { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .opt.ok { border-color: var(--ok); background: var(--okbg); }
+  .opt.bad { border-color: var(--bad); background: var(--badbg); }
+  .opt:disabled { cursor: default; opacity: 1; }
+  .why { margin: 6px 4px 2px 38px; font-size: 15px; color: var(--sub); }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 16px; }
+  button.btn { border: 0; cursor: pointer; font-family: inherit; }
+  button.btn:disabled { opacity: .45; cursor: not-allowed; }
+  .btn.plain { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+  .verdict { font-weight: 600; margin: 0 0 10px; }
+  .verdict.ok { color: var(--ok); } .verdict.bad { color: var(--bad); }
+  .lbl { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--sub); margin: 16px 0 4px; }
+  table.t { border-collapse: collapse; width: 100%; font-size: 15px; margin: 6px 0; }
+  table.t th, table.t td { border: 1px solid var(--line); padding: 7px 9px; text-align: left; vertical-align: top; }
+  .opttable { overflow-x: auto; }
+  .note { color: var(--sub); font-size: 14px; }
+  .err { color: var(--bad); font-weight: 500; }
+  h1.serif { font-size: 28px; line-height: 1.2; margin: 6px 0 10px; }
+</style>
+</head>
+<body>
+<header><div class="in">
+  <a class="brand" href="./"><img src="icon.png" alt=""><b>QANUN</b></a>
+  <nav><a href="./">Home</a><a href="./#plans">Plans</a></nav>
+</div></header>
+<main><div id="app"><p class="note">Loading…</p></div>
+<p class="note" style="margin-top:22px">Qanun is for education and exam preparation. It is not medical advice and does not replace a clinician's judgement. <a href="privacy.html">Privacy policy</a></p></main>
+<footer><div class="in"><span>© 2026 Dr. Owais Nawaz Khan</span><a href="privacy.html">Privacy policy</a><a href="mailto:doctorkhanawais@gmail.com">doctorkhanawais@gmail.com</a></div></footer>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+
+const API = 'https://api.alqanun.pk';
+const auth = getAuth(initializeApp({
+  apiKey: 'AIzaSyAmxejdARGVEwVWbQOaKRsh2EQG25aNPII', authDomain: 'qanun-f1a87.firebaseapp.com', projectId: 'qanun-f1a87',
+  storageBucket: 'qanun-f1a87.firebasestorage.app', messagingSenderId: '412268260572', appId: '1:412268260572:web:ceeced8aa5457ac3805819'
+}));
+const root = document.getElementById('app');
+const LETTERS = 'ABCDEFGH';
+const WA = 'https://wa.me/923341910206?text=' + encodeURIComponent('Assalam Waalaikum, I would like to buy a Qanun Subscription');
+let tally = { right: 0, total: 0 };
+
+function h(tag, props, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(props || {})) {
+    if (k === 'class') e.className = v; else if (k.startsWith('on')) e.addEventListener(k.slice(2), v); else if (v !== false && v != null) e.setAttribute(k, v);
+  }
+  for (const c of kids.flat()) { if (c == null || c === false) continue; e.append(c.nodeType ? c : document.createTextNode(String(c))); }
+  return e;
+}
+const show = (...nodes) => { root.replaceChildren(...nodes); window.scrollTo(0, 0); };
+const btn = (label, onclick, cls = 'primary') => h('button', { class: 'btn ' + cls, type: 'button', onclick }, label);
+
+// A random id kept in this browser. The server counts the free questions per ACCOUNT for browsers, so clearing it gains nothing.
+let memId = null;
+function deviceId() {
+  let id = memId; try { id = id || localStorage.getItem('qanun_web_dev'); } catch {}
+  if (!id || id.length < 16) {
+    const a = new Uint8Array(20); crypto.getRandomValues(a);
+    id = [...a].map((x) => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[x % 36]).join('');
+    try { localStorage.setItem('qanun_web_dev', id); } catch {}
+  }
+  return (memId = id);
+}
+async function call(path, body) {
+  const token = await auth.currentUser.getIdToken();
+  let r; try { r = await fetch(API + path, { method: 'POST', headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' }, body: JSON.stringify({ deviceId: deviceId(), ...body }) }); }
+  catch { return { status: 0, error: 'Could not reach Qanun. Check your internet connection and try again.' }; }
+  let j = {}; try { j = await r.json(); } catch {}
+  return { status: r.status, ...j };
+}
+
+function signInScreen(message) {
+  show(h('div', { class: 'card' },
+    h('h1', { class: 'serif' }, 'Try Qanun on the web'),
+    h('p', {}, 'Ten free medical exam questions every day, each with a full explanation for every option. Sign in with Google to start.'),
+    message ? h('p', { class: 'err' }, message) : null,
+    h('div', { class: 'row' }, btn('Sign in with Google', async () => {
+      try { await signInWithPopup(auth, new GoogleAuthProvider()); }
+      catch (e) {
+        if (e && e.code === 'auth/popup-closed-by-user') return;
+        signInScreen(e && e.code === 'auth/unauthorized-domain' ? 'This website address is not allowed for sign-in yet.' : e && e.code === 'auth/popup-blocked' ? 'Your browser blocked the sign-in window. Allow pop-ups for this site and try again.' : 'Sign-in did not work. Please try again.');
+      }
+    })),
+    h('p', { class: 'note' }, 'The full question bank, your own library and the research tools are in the Qanun app. ', h('a', { href: './#get' }, 'Get Qanun'), '.')));
+}
+function errorScreen(message) {
+  show(h('div', { class: 'card' }, h('p', { class: 'err' }, message || 'Something went wrong.'),
+    h('div', { class: 'row' }, btn('Try again', start), btn('Sign out', () => signOut(auth), 'plain'))));
+}
+function doneScreen() {
+  show(h('div', { class: 'card' },
+    h('h1', { class: 'serif' }, 'That is your free set for today'),
+    tally.total ? h('p', {}, `This visit you answered ${tally.right} of ${tally.total} correctly.`) : null,
+    h('p', {}, 'Your free questions start again tomorrow. For the whole question bank (more than 6,000 questions for MBBS and FCPS Part 1), flashcards, your own library and more, get Qanun with a Student or Clinician plan.'),
+    h('div', { class: 'row' }, h('a', { class: 'btn primary', href: './#plans' }, 'See plans'), h('a', { class: 'btn plain', href: WA }, 'Buy on WhatsApp'), btn('Sign out', () => signOut(auth), 'plain'))));
+}
+function paidScreen() {
+  show(h('div', { class: 'card' },
+    h('h1', { class: 'serif' }, 'Your plan includes the whole question bank'),
+    h('p', {}, 'The website currently offers the free daily questions only. Use the Qanun app on your phone or computer to practise with your full plan.'),
+    h('div', { class: 'row' }, h('a', { class: 'btn primary', href: './#get' }, 'Get the app'), btn('Sign out', () => signOut(auth), 'plain'))));
+}
+
+async function start() {
+  show(h('p', { class: 'note' }, 'Loading…'));
+  const reg = await call('/v1/device', { kind: 'web' });
+  if (reg.status === 401) return signInScreen('Please sign in again.');
+  if (reg.status !== 200) return errorScreen(reg.error);
+  next();
+}
+async function next() {
+  show(h('p', { class: 'note' }, 'Loading your next question…'));
+  const r = await call('/v1/free/question', {});
+  if (r.status === 429) return doneScreen();
+  if (r.status === 409 && r.unlimited) return paidScreen();
+  if (r.status === 401) return signInScreen('Please sign in again.');
+  if (r.status !== 200 || !r.question) return errorScreen(r.error);
+  question(r.question);
+}
+
+function question(q) {
+  let chosen = null; const optEls = [];
+  const submit = btn('Check answer', async () => {
+    submit.disabled = true; submit.textContent = 'Checking…';
+    const r = await call('/v1/free/answer', { k: q.k, choice: chosen });
+    if (r.status !== 200) { submit.disabled = false; submit.textContent = 'Check answer'; msg.textContent = r.error || 'Could not check the answer. Try again.'; return; }
+    result(q, r, optEls);
+  });
+  submit.disabled = true;
+  const msg = h('p', { class: 'err' });
+  const pick = (i) => { chosen = i; optEls.forEach((o, j) => { o.btn.classList.toggle('sel', j === i); o.btn.setAttribute('aria-pressed', j === i ? 'true' : 'false'); }); submit.disabled = false; };
+  let optsBox;
+  if (q.cols) {
+    const rows = q.options.map((t, i) => {
+      const b = h('button', { class: 'opt', type: 'button', 'aria-pressed': 'false', onclick: () => pick(i) }, h('span', { class: 'L' }, LETTERS[i]));
+      optEls.push({ btn: b, wrap: b });
+      const cells = String(t).split('|').map((x) => x.trim());
+      return h('tr', {}, h('td', {}, b), ...q.cols.map((_, c) => h('td', {}, cells[c] || '')));
+    });
+    optsBox = h('div', { class: 'opttable' }, h('table', { class: 't' }, h('thead', {}, h('tr', {}, h('th', {}, ''), ...q.cols.map((c) => h('th', {}, c)))), h('tbody', {}, rows)));
+  } else {
+    optsBox = h('div', { class: 'opts' }, q.options.map((t, i) => {
+      const b = h('button', { class: 'opt', type: 'button', 'aria-pressed': 'false', onclick: () => pick(i) }, h('span', { class: 'L' }, LETTERS[i]), h('span', {}, t));
+      const wrap = h('div', {}, b); optEls.push({ btn: b, wrap }); return wrap;
+    }));
+  }
+  show(h('div', { class: 'card' },
+    h('div', { class: 'top' }, h('span', {}, `Question ${q.n} of ${q.perDay} today`), h('span', {}, h('span', { class: 'chip' }, q.system || 'Question'), ' ', h('span', { class: 'chip' }, q.difficulty || ''))),
+    h('p', { class: 'stem' }, q.stem), q.leadIn ? h('p', { class: 'lead' }, q.leadIn) : null,
+    optsBox, msg, h('div', { class: 'row' }, submit)));
+}
+
+function result(q, r, optEls) {
+  tally.total++; if (r.right) tally.right++;
+  optEls.forEach((o, i) => {
+    o.btn.disabled = true; o.btn.classList.remove('sel');
+    if (i === r.correct) o.btn.classList.add('ok'); else if (i === r.choice) o.btn.classList.add('bad');
+    if (r.options[i] && !q.cols) o.wrap.append(h('p', { class: 'why' }, (i === r.correct ? 'Correct. ' : '') + r.options[i]));
+  });
+  const card = root.querySelector('.card');
+  card.querySelector('.row')?.remove(); card.querySelector('.err')?.remove();
+  if (q.cols) { const why = r.options.map((t, i) => t ? h('p', { class: 'why', style: 'margin-left:0' }, `${LETTERS[i]}. ${i === r.correct ? 'Correct. ' : ''}${t}`) : null); card.append(h('div', {}, why)); }
+  card.append(h('p', { class: 'verdict ' + (r.right ? 'ok' : 'bad') }, r.right ? 'Correct.' : `Not quite. The answer is ${LETTERS[r.correct]}.`));
+  if (r.explanation) card.append(h('div', { class: 'lbl' }, 'Explanation'), h('div', {}, r.explanation));
+  if (r.table && r.table.head && r.table.rows) card.append(h('div', { class: 'opttable' }, h('table', { class: 't' }, r.table.cap ? h('caption', { class: 'note' }, r.table.cap) : null, h('thead', {}, h('tr', {}, r.table.head.map((c) => h('th', {}, c)))), h('tbody', {}, r.table.rows.map((row) => h('tr', {}, row.map((c) => h('td', {}, c))))))));
+  if (r.objective) card.append(h('div', { class: 'lbl' }, 'Educational objective'), h('div', {}, r.objective));
+  card.append(h('div', { class: 'row' }, btn(r.left > 0 ? 'Next question' : 'Finish for today', next), h('span', { class: 'note' }, r.left > 0 ? `${r.left} left today` : '')));
+}
+
+onAuthStateChanged(auth, (u) => { if (!u) { tally = { right: 0, total: 0 }; signInScreen(); } else start(); });
+</script>
+</body>
+</html>
