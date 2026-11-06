@@ -44,7 +44,8 @@
 <body>
 <header><div class="in">
   <a class="brand" href="./"><img src="icon.png" alt=""><b>QANUN</b></a>
-  <nav><a href="./">Home</a><a href="./#plans">Plans</a></nav>
+  <button class="menu" aria-label="Menu" aria-expanded="false" onclick="var h=this.closest('header'),o=h.classList.toggle('open');this.setAttribute('aria-expanded',o)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <nav onclick="if(event.target.tagName==='A')this.closest('header').classList.remove('open')"><a href="./">Home</a><a href="./#plans">Plans</a></nav>
 </div></header>
 <main><div id="app"><p class="note">Loading…</p></div>
 <p class="note" style="margin-top:22px">Qanun is for education and exam preparation. It is not medical advice and does not replace a clinician's judgement. <a href="privacy.html">Privacy policy</a></p></main>

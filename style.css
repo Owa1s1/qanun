@@ -123,3 +123,24 @@ footer a { color: var(--sub); }
 .devshot.flat { border: 1px solid var(--line); border-radius: 12px; }
 .devshot.solo { margin-top: 34px; }
 @media (max-width: 760px) { .dev, .dev:nth-of-type(even) { grid-template-columns: 1fr; gap: 18px; } .dev:nth-of-type(even) .devshot { order: 0; } }
+
+/* phones: menu button instead of a crowded row of links, and roomier spacing (6 Nov 2026) */
+header .menu { display: none; margin-left: auto; background: none; border: 0; color: #fff; width: 44px; height: 44px; border-radius: 10px; cursor: pointer; }
+header .menu svg { width: 26px; height: 26px; }
+@media (max-width: 760px) {
+  header { position: sticky; top: 0; z-index: 20; }
+  header .in { flex-wrap: wrap; padding: 10px 16px; }
+  header .brand img { width: 34px; height: 34px; }
+  header .brand b { font-size: 19px; letter-spacing: .12em; }
+  header .menu { display: inline-flex; align-items: center; justify-content: center; }
+  header nav { display: none; width: 100%; flex-direction: column; gap: 0; margin: 6px 0 4px; font-size: 17px; }
+  header nav .hide-s { display: block; }
+  header.open nav { display: flex; }
+  header nav a { padding: 13px 4px; border-top: 1px solid rgba(255,255,255,.12); color: var(--onDeep); }
+  section { padding: 48px 0; }
+  .hero .wrap { padding-top: 32px; }
+  .hero h1 { font-size: 34px; }
+  .hero p.lead { font-size: 17px; }
+  .btns .btn { flex: 1 1 100%; justify-content: center; }
+  footer .in { flex-direction: column; gap: 6px; }
+}

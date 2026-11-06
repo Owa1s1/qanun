@@ -15,7 +15,8 @@
 <body>
 <header><div class="in">
   <a class="brand" href="./"><img src="icon.png" alt=""><b>QANUN</b></a>
-  <nav><a href="#features">Features</a><a href="#subjects" class="hide-s">Subjects</a><a href="#devices" class="hide-s">Devices</a><a href="#plans">Plans</a><a href="practice.html">Try free</a><a href="#get">Get Qanun</a></nav>
+  <button class="menu" aria-label="Menu" aria-expanded="false" onclick="var h=this.closest('header'),o=h.classList.toggle('open');this.setAttribute('aria-expanded',o)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <nav onclick="if(event.target.tagName==='A')this.closest('header').classList.remove('open')"><a href="#features">Features</a><a href="#subjects" class="hide-s">Subjects</a><a href="#devices" class="hide-s">Devices</a><a href="#plans">Plans</a><a href="practice.html">Try free</a><a href="download.html">Get Qanun</a></nav>
 </div></header>
 
 <div class="hero"><div class="wrap">
@@ -24,7 +25,7 @@
     <p class="lead">A study app for medical students and doctors: more than 6,500 MBBS, FCPS Part 1 and PGMI questions, with USMLE, PLAB, AMC and BDS coming, each with a full explanation for every option, flashcards, your own library and research guidance, in one place.</p>
     <p class="who">Made in Pakistan by Dr. Owais Nawaz Khan.</p>
     <div class="btns">
-      <a class="btn primary" href="#get">Get Qanun</a>
+      <a class="btn primary" href="download.html">Get Qanun</a>
       <a class="btn ghost" href="#features">See what it does</a>
       <a class="btn ghost" href="practice.html">Try 10 free questions</a>
     </div>
@@ -131,7 +132,7 @@
 
 <section id="get" class="band"><div class="wrap">
   <h2>Get Qanun</h2>
-  <p class="intro">Android: coming soon to Google Play; testing begins now. Windows and Mac: write to us for a copy.</p>
+  <p class="intro">Choose your device on the <a href="download.html">download page</a>. To buy a plan, write to us:</p>
   <div class="btns">
     <a class="btn primary" href="https://wa.me/923341910206?text=Assalam%20Waalaikum%2C%20I%20would%20like%20to%20buy%20a%20Qanun%20Subscription">WhatsApp <small>+92 334 1910206</small></a>
     <a class="btn ghost" href="mailto:doctorkhanawais@gmail.com?subject=Qanun%20Subscription&amp;body=Assalam%20Waalaikum%2C%20I%20would%20like%20to%20buy%20a%20Qanun%20Subscription">Email <small>doctorkhanawais@gmail.com</small></a>

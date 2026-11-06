@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Qanun: download for Windows, Mac, Android and iPhone</title>
+<meta name="description" content="Download Qanun, the study app for medical students and doctors, for Windows, Mac, Android, iPhone and iPad.">
+<link rel="icon" href="icon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.dl-hero { background: radial-gradient(90% 120% at 15% 30%, #17505E 0%, var(--deep) 55%, var(--deep2) 100%); color: #fff; padding: 56px 0 48px; }
+.dl-hero h1 { font: 400 clamp(32px, 4.6vw, 52px)/1.15 'Libre Baskerville', Georgia, serif; margin: 0 0 12px; }
+.dl-hero p { color: var(--onDeep); font-size: 18px; max-width: 36em; margin: 0; }
+.plats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.plat { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 10px; }
+.plat.mine { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.plat .ico { width: 44px; height: 44px; color: var(--accent); }
+.plat h3 { margin: 0; font-size: 21px; }
+.plat .for { color: var(--sub); font-size: 15px; margin: 0; }
+.plat .tag { align-self: flex-start; font-size: 13px; font-weight: 600; padding: 3px 10px; border-radius: 99px; background: rgba(201,162,78,.18); color: #8A6A1E; }
+.plat .mine-tag { display: none; font-size: 13px; color: var(--accent); font-weight: 600; }
+.plat.mine .mine-tag { display: block; }
+.plat .go { margin-top: auto; }
+.plat .btn.ghost { color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.plat details { font-size: 15px; color: var(--sub); }
+.plat details summary { cursor: pointer; color: var(--ink); font-weight: 500; }
+.plat ol { padding-left: 20px; margin: 8px 0 0; }
+@media (prefers-color-scheme: dark) { .plat .tag { color: var(--gold); } }
+</style>
+</head>
+<body>
+<header><div class="in">
+  <a class="brand" href="./"><img src="icon.png" alt=""><b>QANUN</b></a>
+  <button class="menu" aria-label="Menu" aria-expanded="false" onclick="var h=this.closest('header'),o=h.classList.toggle('open');this.setAttribute('aria-expanded',o)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <nav onclick="if(event.target.tagName==='A')this.closest('header').classList.remove('open')"><a href="./#features">Features</a><a href="./#plans">Plans</a><a href="practice.html">Try free</a><a href="download.html">Get Qanun</a></nav>
+</div></header>
+
+<div class="dl-hero"><div class="wrap">
+  <h1>Get Qanun</h1>
+  <p>Choose your device. Your plan works on one phone or tablet and one computer.</p>
+</div></div>
+
+<section><div class="wrap">
+  <div class="plats" id="plats"></div>
+  <p class="note" style="margin-top:28px">While the apps are being tested, you can try 10 questions a day on the <a href="practice.html">free practice page</a>. To be told when your version is ready, or to buy a plan, write to us on <a href="https://wa.me/923341910206?text=Assalam%20Waalaikum%2C%20please%20tell%20me%20when%20Qanun%20is%20ready%20to%20download">WhatsApp</a> or by <a href="mailto:doctorkhanawais@gmail.com?subject=Qanun%20download">email</a>.</p>
+</div></section>
+
+<footer><div class="in"><span>© 2026 Dr. Owais Nawaz Khan</span><a href="privacy.html">Privacy policy</a><a href="mailto:doctorkhanawais@gmail.com">doctorkhanawais@gmail.com</a></div></footer>
+
+<script>
+// To open a platform, put its link in url (null = Coming soon). Nothing else needs changing.
+const PLATFORMS = [
+  { id: 'windows', name: 'Windows', for: 'Windows 10 and 11, 64-bit', url: null, label: 'Download for Windows',
+    help: '<details><summary>Installing</summary><ol><li>Open the downloaded Qanun-Setup file.</li><li>If Windows shows "Windows protected your PC", choose More info, then Run anyway.</li><li>Accept the licence and follow the steps.</li></ol></details>',
+    icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5 10.5 4.4v7.1H3zm0 13 7.5 1.1v-7H3zm8.5 1.3L21 21V12.6h-9.5zm0-15.6V11.5H21V3z"/></svg>' },
+  { id: 'mac', name: 'Mac', for: 'MacBook, iMac and Mac mini: Apple chips (M1 to M4) and older Intel Macs', url: null, label: 'Download for Mac',
+    help: '<details><summary>Which Mac do I have?</summary><p>One download works on every Mac, Apple chip or Intel. To check yours anyway: Apple menu, About This Mac, then look at Chip or Processor.</p></details>',
+    icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9C5.9 6.8 4.3 7.8 3.4 9.4c-1.9 3.2-.5 8 1.3 10.6.9 1.3 1.9 2.7 3.3 2.6 1.3-.1 1.8-.9 3.4-.9s2 .9 3.4.8c1.4 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.9-1.1-3-4.3zM13.9 4.9c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.3 2-1.1 3.2 1.1.1 2.3-.6 3-1.5z"/></svg>' },
+  { id: 'android', name: 'Android', for: 'Android phones and tablets, from Google Play', url: null, label: 'Get it on Google Play',
+    help: '', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 9.5 19.5 6.2a.5.5 0 0 0-.9-.5l-1.9 3.3A11 11 0 0 0 12 8a11 11 0 0 0-4.7 1L5.4 5.7a.5.5 0 0 0-.9.5l1.9 3.3A9.8 9.8 0 0 0 1.5 17h21a9.8 9.8 0 0 0-4.9-7.5zM7 14.2a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm10 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>' },
+  { id: 'ios', name: 'iPhone and iPad', for: 'No App Store app: Qanun opens in Safari and is added to your Home Screen, where it works like an app', url: null, label: 'Open Qanun in Safari',
+    help: '<details><summary>Adding it to your Home Screen</summary><ol><li>Open the link in Safari.</li><li>Tap the Share button (the square with an arrow).</li><li>Choose Add to Home Screen, then Add.</li><li>Open Qanun from its new icon.</li></ol></details>',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10.5 18.5h3"/></svg>' },
+];
+const ua = navigator.userAgent, isIpad = /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
+const mine = /iPhone|iPad|iPod/.test(ua) || isIpad ? 'ios' : /Android/.test(ua) ? 'android' : /Mac OS X/.test(ua) ? 'mac' : /Windows/.test(ua) ? 'windows' : '';
+const list = PLATFORMS.slice().sort((a, b) => (b.id === mine) - (a.id === mine));
+document.getElementById('plats').innerHTML = list.map((p) => `
+  <div class="plat${p.id === mine ? ' mine' : ''}">
+    <span class="ico">${p.icon}</span><span class="mine-tag">Your device</span>
+    <h3>${p.name}</h3><p class="for">${p.for}</p>
+    ${p.url ? '' : '<span class="tag">Coming soon</span>'}
+    ${p.help}
+    <div class="go">${p.url ? `<a class="btn dark" href="${p.url}"${p.id === 'windows' || p.id === 'mac' ? ' download' : ''}>${p.label}</a>` : `<a class="btn ghost" href="https://wa.me/923341910206?text=${encodeURIComponent('Assalam Waalaikum, please tell me when Qanun for ' + p.name + ' is ready')}">Tell me when it is ready</a>`}</div>
+  </div>`).join('');
+</script>
+</body>
+</html>
