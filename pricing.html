@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qanun pricing: Free, Student and Clinician plans</title>
+<meta name="description" content="Qanun plans and prices: free every day, or a Student or Clinician plan for the whole question bank, Ask Avicenna and more.">
+<link rel="icon" href="icon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .pr-head { text-align: center; }
+  .pr-head .intro { margin: 0 auto 26px; }
+  .switch { display: inline-flex; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 4px; gap: 2px; margin-bottom: 10px; }
+  .switch button { border: 0; background: none; font: 600 15px/1 Inter, system-ui, sans-serif; color: var(--sub); padding: 11px 16px; border-radius: 999px; cursor: pointer; }
+  .switch button[aria-pressed="true"] { background: var(--deep); color: #fff; }
+  .switch .save { display: inline-block; margin-left: 6px; font-size: 12px; color: var(--gold); }
+  .region { color: var(--sub); font-size: 14px; margin: 4px 0 30px; }
+  .plan .price small { font: 500 15px/1 Inter, system-ui, sans-serif; color: var(--sub); }
+  .plan .was { color: var(--sub); font-size: 14px; min-height: 21px; }
+  .plan .tag { display: inline-block; background: var(--gold); color: #1B1405; font: 600 12px/1 Inter, system-ui, sans-serif; padding: 5px 9px; border-radius: 999px; margin-left: 8px; vertical-align: middle; }
+  .plan .btn { margin-top: 18px; width: 100%; justify-content: center; }
+  .plan .btn.ghost { color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+  .compare { margin-top: 56px; }
+  .compare h2 { font: 400 clamp(24px, 3vw, 32px)/1.2 'Libre Baskerville', Georgia, serif; margin: 0 0 16px; }
+  .compare table { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .compare th, .compare td { padding: 12px 14px; }
+  .compare td:not(:first-child), .compare th:not(:first-child) { text-align: center; width: 18%; }
+  .compare thead th { color: var(--text); background: rgba(11,130,122,.08); }
+  .compare .y { color: var(--accent); font-weight: 600; }
+  .compare .n { color: var(--sub); }
+  .compare .grp td { font-weight: 600; background: rgba(201,162,78,.10); }
+  .faq { margin-top: 56px; max-width: 760px; }
+  .faq h2 { font: 400 clamp(24px, 3vw, 32px)/1.2 'Libre Baskerville', Georgia, serif; margin: 0 0 8px; }
+  .faq details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+  .faq summary { font-weight: 600; cursor: pointer; }
+  .faq p { color: var(--sub); margin: 10px 0 0; }
+  @media (max-width: 560px) { .switch button { padding: 10px 11px; font-size: 14px; } .compare th, .compare td { padding: 10px 8px; font-size: 14px; } }
+</style>
+</head>
+<body>
+<header><div class="in">
+  <a class="brand" href="./"><img src="icon.png" alt=""><b>QANUN</b></a>
+  <button class="menu" aria-label="Menu" aria-expanded="false" onclick="var h=this.closest('header'),o=h.classList.toggle('open');this.setAttribute('aria-expanded',o)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <nav onclick="if(event.target.tagName==='A')this.closest('header').classList.remove('open')"><a href="./">Home</a><a href="./#features">Features</a><a href="pricing.html">Pricing</a><a href="practice.html">Try free</a><a href="download.html">Get Qanun</a></nav>
+</div></header>
+
+<section><div class="wrap">
+  <div class="pr-head">
+    <h2>Simple plans, fair prices</h2>
+    <p class="intro">Qanun is free to use every day. A plan opens the whole question bank, Ask Avicenna and everything else, on your phone, tablet, computer and the web.</p>
+    <div class="switch" role="group" aria-label="Billing period">
+      <button type="button" data-p="month" aria-pressed="false">Monthly</button>
+      <button type="button" data-p="half" aria-pressed="false">6 months</button>
+      <button type="button" data-p="year" aria-pressed="true">Yearly<span class="save" id="saveTag"></span></button>
+    </div>
+    <p class="region" id="region">Showing prices for Pakistan.</p>
+  </div>
+
+  <div class="plans">
+    <div class="plan"><h3>Free</h3><div class="price">Free</div><div class="was">every day, no card needed</div>
+      <ul><li>10 new bank questions a day from a free set, and questions you have seen any time</li><li>Two books in your library</li><li>Up to 40 flashcards</li><li>Lab values and the calculator</li><li>One research project</li><li>Free medical books</li></ul>
+      <a class="btn ghost" href="practice.html">Try 10 free questions</a></div>
+
+    <div class="plan main"><h3>Student <span class="tag">Most popular</span></h3><div class="price" data-plan="student"></div><div class="was" data-was="student"></div>
+      <ul><li>The whole question bank: MBBS, FCPS Part 1, PGMI and BDS, with every new question</li><li>PGMI mock tests</li><li>Ask Avicenna, your AI tutor, on every question</li><li>Up to 15 books in your library</li><li>Unlimited flashcards and question sets</li><li>Every research study type</li><li>All themes, including dark</li></ul>
+      <a class="btn primary buy" href="#" data-plan="Student">Get Student</a></div>
+
+    <div class="plan"><h3>Clinician</h3><div class="price" data-plan="clinician"></div><div class="was" data-was="clinician"></div>
+      <ul><li>Everything in the Student plan</li><li>An unlimited library</li><li>Clinical search: ranked diagnoses, management and protocols, with current guidelines</li><li>The daily clinical brief</li><li>Bedside calculators</li><li>MedArcade case simulations <em>(coming soon)</em></li></ul>
+      <a class="btn dark buy" href="#" data-plan="Clinician">Get Clinician</a></div>
+  </div>
+  <p class="note" id="payNote">Pay by Easypaisa, JazzCash, NayaPay, SadaPay or bank transfer: tap a plan to message us on WhatsApp. In the Android app, plans are sold through Google Play. Renewing a yearly plan costs 30% less.</p>
+
+  <div class="compare">
+    <h2>Compare the plans</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Feature</th><th>Free</th><th>Student</th><th>Clinician</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="4">Practice</td></tr>
+        <tr><td>Qanun question bank</td><td class="n">10 a day</td><td class="y">All</td><td class="y">All</td></tr>
+        <tr><td>Full explanation for every option</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+        <tr><td>PGMI mock tests</td><td class="n">–</td><td class="y">✓</td><td class="y">✓</td></tr>
+        <tr><td>Flashcards</td><td class="n">40</td><td class="y">Unlimited</td><td class="y">Unlimited</td></tr>
+        <tr><td>Your own imported question banks</td><td class="n">20 questions</td><td class="y">Unlimited</td><td class="y">Unlimited</td></tr>
+        <tr class="grp"><td colspan="4">Ask Avicenna (AI)</td></tr>
+        <tr><td>AI tutor on bank questions</td><td class="n">–</td><td class="y">✓</td><td class="y">✓</td></tr>
+        <tr><td>Clinical search with current guidelines</td><td class="n">–</td><td class="n">–</td><td class="y">✓</td></tr>
+        <tr><td>Daily clinical brief</td><td class="n">–</td><td class="n">–</td><td class="y">✓</td></tr>
+        <tr class="grp"><td colspan="4">Library and research</td></tr>
+        <tr><td>Books in your library</td><td class="n">2</td><td class="y">15</td><td class="y">Unlimited</td></tr>
+        <tr><td>Free medical books</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+        <tr><td>Research projects</td><td class="n">1</td><td class="y">Unlimited</td><td class="y">Unlimited</td></tr>
+        <tr class="grp"><td colspan="4">Devices</td></tr>
+        <tr><td>Phone or tablet, computer and the web</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">AI features have a fair-use monthly allowance for each plan. Features marked “coming soon” arrive with updates at no extra cost.</p>
+  </div>
+
+  <div class="faq">
+    <h2>Questions</h2>
+    <details><summary>Which plan should I choose?</summary><p>Students preparing for MBBS, BDS, FCPS Part 1 or PGMI need the Student plan. Doctors who also want clinical search, the daily brief and bedside tools should choose Clinician.</p></details>
+    <details><summary>How do I pay?</summary><p>On the Android app, through Google Play. For the computer apps and the web, pay by Easypaisa, JazzCash, NayaPay, SadaPay or bank transfer: message us on WhatsApp and we activate your plan.</p></details>
+    <details><summary>Can I use one plan on several devices?</summary><p>A plan is for one person, on one computer and one phone or tablet, plus the web. One device can be in use at a time.</p></details>
+    <details><summary>Does my plan renew by itself?</summary><p>Google Play plans renew until you cancel them in Google Play; please cancel at least 48 hours before the renewal date. Plans paid to us directly do not renew by themselves.</p></details>
+    <details><summary>Can I get a refund?</summary><p>Yes, in full, if you ask within 48 hours of paying, whether you paid on Google Play or to us directly. After 48 hours there is no refund. Full details are in the <a href="terms.html#refunds">terms of service</a>.</p></details>
+    <details><summary>I live outside Pakistan. What do I pay?</summary><p>This page shows the price for the country you are in. Write to us on WhatsApp or by email to arrange payment.</p></details>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="note" style="margin-top:0"><b>For study only.</b> Qanun is a learning tool. It is not a medical device and does not give advice about any patient.</p>
+</div></section>
+
+<footer><div class="in"><span>© 2026 Dr. Owais Nawaz Khan</span><a href="./">Qanun</a><a href="pricing.html">Pricing</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a><a href="mailto:doctorkhanawais@gmail.com">doctorkhanawais@gmail.com</a></div></footer>
+
+<script>
+(function () {
+  // Must match server/plans.js PRICES and LOW_COUNTRIES.
+  var PRICES = {
+    PK: { cur: 'Rs ', student: { month: 400, half: 2000, year: 3200 }, clinician: { month: 700, half: 3200, year: 5200 } },
+    LOW: { cur: '$', student: { month: 4, half: 19, year: 29 }, clinician: { month: 8, half: 39, year: 59 } },
+    INTL: { cur: '$', student: { month: 8, half: 39, year: 69 }, clinician: { month: 15, half: 75, year: 129 } }
+  };
+  var LOW = 'IN BD NP LK AF MM ID PH VN KH LA UZ TJ KG BT YE SY IQ IR PS JO LB DZ AO BJ BW BF BI CV CM CF TD KM CD CG CI DJ EG GQ ER SZ ET GA GM GH GN GW KE LS LR MG MW ML MR MU MA MZ NA NE NG RW ST SN SL SO SS SD TZ TG TN UG ZM ZW YT BO HT HN NI GT'.split(' ');
+  var region = 'PK', period = 'year', country = '';
+  var LABEL = { month: 'a month', half: 'for 6 months', year: 'a year' };
+  function fmt(r, n) { return PRICES[r].cur + n.toLocaleString('en-US'); }
+  function draw() {
+    var P = PRICES[region];
+    ['student', 'clinician'].forEach(function (k) {
+      var p = P[k], el = document.querySelector('.price[data-plan="' + k + '"]'), was = document.querySelector('[data-was="' + k + '"]');
+      el.innerHTML = fmt(region, p[period]) + ' <small>' + LABEL[period] + '</small>';
+      if (period === 'month') was.textContent = 'cancel any time';
+      else { var full = p.month * (period === 'year' ? 12 : 6), save = Math.round((1 - p[period] / full) * 100);
+        was.textContent = 'Save ' + save + '% (' + fmt(region, full) + ' paid monthly)'; }
+    });
+    var s = Math.round((1 - P.student.year / (P.student.month * 12)) * 100);
+    document.getElementById('saveTag').textContent = 'save ' + s + '%';
+    document.querySelectorAll('.switch button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.p === period); });
+    document.getElementById('region').textContent = region === 'PK' ? 'Showing prices for Pakistan.' : 'Showing prices for your country' + (country ? ' (' + country + ')' : '') + ', in US dollars.';
+    document.getElementById('payNote').textContent = region === 'PK'
+      ? 'Pay by Easypaisa, JazzCash, NayaPay, SadaPay or bank transfer: tap a plan to message us on WhatsApp. In the Android app, plans are sold through Google Play. Renewing a yearly plan costs 30% less.'
+      : 'Tap a plan to message us on WhatsApp and we will arrange payment. In the Android app, plans are sold through Google Play in your currency. Renewing a yearly plan costs 30% less.';
+  }
+  document.querySelectorAll('.switch button').forEach(function (b) { b.addEventListener('click', function () { period = b.dataset.p; draw(); }); });
+  document.querySelectorAll('.buy').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var P = PRICES[region][a.dataset.plan.toLowerCase()];
+      var msg = 'Assalam Waalaikum, I would like to buy a Qanun Subscription: ' + a.dataset.plan + ' plan, ' + ({ month: 'monthly', half: '6 months', year: 'yearly' })[period] + ' (' + fmt(region, P[period]) + ').';
+      location.href = 'https://wa.me/923341910206?text=' + encodeURIComponent(msg);
+    });
+  });
+  draw();
+  // The site is served through Cloudflare, which tells the visitor's country here (no personal details).
+  fetch('/cdn-cgi/trace').then(function (r) { return r.text(); }).then(function (t) {
+    var m = t.match(/^loc=([A-Z]{2})/m); if (!m) return;
+    country = m[1]; region = country === 'PK' ? 'PK' : (LOW.indexOf(country) >= 0 ? 'LOW' : 'INTL'); draw();
+  }).catch(function () {});
+})();
+</script>
+</body>
+</html>

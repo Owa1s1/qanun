@@ -9,61 +9,87 @@
 </head>
 <body>
 <header><div class="in"><a class="brand" href="./"><img src="icon.png" alt=""><b>QANUN</b></a>
-  <button class="menu" aria-label="Menu" aria-expanded="false" onclick="var h=this.closest('header'),o=h.classList.toggle('open');this.setAttribute('aria-expanded',o)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><nav onclick="if(event.target.tagName==='A')this.closest('header').classList.remove('open')"><a href="./">Home</a></nav></div></header>
+  <button class="menu" aria-label="Menu" aria-expanded="false" onclick="var h=this.closest('header'),o=h.classList.toggle('open');this.setAttribute('aria-expanded',o)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><nav onclick="if(event.target.tagName==='A')this.closest('header').classList.remove('open')"><a href="./">Home</a><a href="pricing.html">Pricing</a><a href="terms.html">Terms</a></nav></div></header>
 <main class="page">
 <h1>Privacy policy</h1>
-<p class="sub">Effective 5 November 2026. This policy covers the Qanun apps for Android, Windows and Mac, and the free daily questions on the website alqanun.pk.</p>
+<p class="sub">Effective 13 November 2026. This policy covers the Qanun apps for Android, Windows and Mac, and the website alqanun.pk.</p>
 
-<div class="card"><b>In short:</b> The apps have no accounts, no advertising and no analytics. What you add to Qanun stays on your device, except question reports, which are sent to us so we can correct questions. Text leaves your device only when you use a feature that needs the internet, such as the AI, a PubMed search or a picture from Wikimedia Commons, and it goes straight from your device to that service. We, the developer, do not receive it.</div>
+<div class="card"><b>In short:</b> Qanun has no advertising and no analytics, and we never sell your information. Your books, notes and study work are kept on your own device. To run accounts, plans, the free daily questions, the built-in AI and question reports, our server keeps a small amount of information: your email and name, codes for your devices, your plan, and counts of what you have used. We do not keep the text you send to the AI. Text goes to other services only when you use a feature that needs them, such as a PubMed search.</div>
 
 <h2>Who we are</h2>
-<p>Qanun is made by Dr. Owais Nawaz Khan, Pakistan. For any question about this policy, write to <a href="mailto:doctorkhanawais@gmail.com">doctorkhanawais@gmail.com</a>.</p>
+<p>Qanun is made by Dr. Owais Nawaz Khan, Peshawar, Pakistan. For any question about this policy, write to <a href="mailto:doctorkhanawais@gmail.com">doctorkhanawais@gmail.com</a>.</p>
 
 <h2>What stays on your device</h2>
 <p>Everything you add to Qanun is kept in the app's private storage on your device:</p>
 <ul>
 <li>your profile (the name you enter, your year or exam), settings and theme;</li>
-<li>your practice answers, scores, bookmarks, flashcards and study history;</li>
-<li>books you import, with your highlights and notes;</li>
+<li>your practice answers, scores, bookmarks, flashcards, Avicenna's notes and your study history;</li>
+<li>books you import, with your highlights and notes, and question banks you import;</li>
 <li>research projects and any files you add to them;</li>
-<li>a record of how often you used the AI;</li>
-<li>the AI key you enter, if you choose to set up the AI.</li>
+<li>your own AI key, if you choose to use one instead of Qanun's built-in AI.</li>
 </ul>
-<p>We have no server that receives this information, so we cannot see it. Backups and exports are made only when you ask for them, and saved where you choose (for example your Downloads folder).</p>
+<p>Backups and exports are made only when you ask for them, and saved where you choose. When progress sync between your devices is available, your answers, scores, bookmarks, flags, highlights, notes and flashcard schedules will be copied to our server so they appear on your other devices. Your books and files are never synced; they stay on the device where you added them.</p>
 
-<h2>When information leaves your device</h2>
-<p>Some features need the internet. In each case the request goes directly from your device to the service named here, over an encrypted connection (HTTPS). Each service handles what it receives under its own privacy policy.</p>
+<h2>Your account</h2>
+<p>You sign in with Google, or with an email address. Sign-in is handled by Google (Firebase Authentication); we never see your Google password. Our server, run on Cloudflare, keeps:</p>
+<ul>
+<li>your email address and name, and an account code from Google;</li>
+<li>your plan, its end date and your price region (the country group your price belongs to);</li>
+<li>the devices registered to your account: the type (phone, tablet or computer), a device code and the date it was added. The device code is worked out on your device by a one-way calculation, so it cannot be turned back into your device's own identifier;</li>
+<li>how many free questions and AI requests have been used, per day or month, so the limits work.</li>
+</ul>
+<p>We use this only to run your account, your plan and the limits, and to stop one plan being shared among many people.</p>
+
+<h2>Buying a plan</h2>
+<p><b>Google Play.</b> Payment is handled entirely by Google; we never see your card or bank details. Google sends our server a purchase code, the plan bought, its renewal or end date, and the country of the purchase, which sets your price region. We keep these with your account to confirm your plan.</p>
+<p><b>Paying us directly</b> (Easypaisa, JazzCash, NayaPay, SadaPay or bank transfer). We keep a record of the payment (name, amount, date and transaction reference) and of the plan we gave you, as needed for our accounts.</p>
+<p><b>Licence keys</b> (Windows and Mac apps). We keep a record of each licence we issue: the name on the licence, the device code, the plan and its dates. When online, the app checks its licence with our server, sending the licence number, the device code and the app version; the server notes when that licence was last seen on that device.</p>
+
+<h2>The built-in AI (Ask Avicenna, Search and Research)</h2>
+<p>When you use the AI with a plan, your request goes through our server to an AI service: an OpenRouter model, or Google (Gemini) when OpenRouter is busy. What is sent is the text you type and the passages the feature needs, such as the question you are on or an extract from a book you chose. Our server checks that your device and plan are allowed, counts the request, and passes it on. <b>It does not keep the text of your requests or the answers.</b> The AI service handles the text under its own terms; we choose services that do not use it to train their models where that choice is offered.</p>
+<p>If you use your own AI key instead (in Advanced settings), your request goes straight from your device to the service you chose: Google (Gemini), Anthropic (Claude), Groq or OpenRouter, or Ollama on your own computer. Free versions of some services, such as Google's, may use the text to improve their products; please read their terms.</p>
+<p><b>Never type patient names or other details that could identify a patient.</b></p>
+
+<h2>Other features that use the internet</h2>
+<p>In each case the request goes over an encrypted connection (HTTPS), and the service handles what it receives under its own privacy policy.</p>
 <div class="tablewrap"><table>
 <tr><th>Feature</th><th>What is sent</th><th>Sent to</th></tr>
-<tr><td>AI features (explanations, tutor, writing questions, flashcards, Companion answers, research help)</td><td>The text you type, and the passages the feature needs, such as a question or an extract from a book you chose</td><td>The AI service you set up with your own key: by default Google (Gemini). Others you may choose: Anthropic (Claude), Groq or OpenRouter, or Ollama running on your own computer</td></tr>
 <tr><td>Searching the medical literature</td><td>Your search words</td><td>The US National Library of Medicine (PubMed), Europe PMC, ClinicalTrials.gov and Crossref</td></tr>
 <tr><td>Finding free full-text articles</td><td>The article's identifier, and the email address you enter in Research settings (Unpaywall asks for one)</td><td>Unpaywall</td></tr>
-<tr><td>Pictures in explanations and the glossary</td><td>The name of the picture or term</td><td>Wikimedia Commons and Wikipedia</td></tr>
-<tr><td>Plan checks</td><td>An ordinary request with no personal details, to read the current date and the country you are in, which sets the price list and the licence region</td><td>Google, Cloudflare and Microsoft (date); Cloudflare (country)</td></tr>
+<tr><td>Pictures in explanations and the glossary</td><td>The name of the picture or term</td><td>Wikimedia Commons and Wikipedia, directly or through our server when the direct route fails</td></tr>
+<tr><td>Free medical books</td><td>The name of the book you choose</td><td>OpenStax, or the publisher's own website for books read online</td></tr>
+<tr><td>Date and country checks</td><td>An ordinary request with no personal details, to read the current date and your country, which sets your price list</td><td>Google, Cloudflare and Microsoft (date); Cloudflare (country)</td></tr>
 <tr><td>Prices in your currency</td><td>An ordinary request with no personal details</td><td>open.er-api.com</td></tr>
 </table></div>
-<p>As with any internet request, these services can see your device's IP address. If you use the free version of Google's AI service, Google may use the text it receives to improve its products; please read <a href="https://ai.google.dev/gemini-api/terms">Google's terms</a>. <b>Never type patient names or other details that could identify a patient.</b></p>
+<p>As with any internet request, these services and our hosting providers (Cloudflare, GitHub Pages, Google) can see your device's IP address.</p>
 
 <h2>The website: free daily questions</h2>
-<p>The page alqanun.pk/practice.html offers free daily questions and needs a Google sign-in. This is the only part of Qanun that has an account and a server. When you use it, our server (run on Cloudflare) receives and keeps: your Google account's email address and name; a random code made by your browser to recognise it; the date and number of free questions you were given, and which ones, so that the daily limit works and questions do not repeat. Sign-in is handled by Google (Firebase Authentication); we never see your Google password. We use this information only to run the free questions and the daily limit, not for advertising or analytics, and we do not sell it. As with any internet request, our hosting providers (GitHub Pages, Cloudflare, Google) can see your IP address. To have your website account and its records deleted, write to doctorkhanawais@gmail.com.</p>
-<h2>Licences</h2>
-<p>Qanun shows a device code, worked out on your device from the device's own identifier by a one-way calculation. It is never sent anywhere by the app. If you choose to send it to us to obtain a licence, we keep a record of the licences we issue: the name on the licence, the device code, the plan and its dates. You can ask us to delete this record.</p>
+<p>The free questions on alqanun.pk need a Google sign-in. Our server keeps your account details (see above), a random code made by your browser to recognise it, and which free questions you were given each day and the answer you chose, so the daily limit works and questions do not repeat.</p>
 
 <h2>Reports and feedback</h2>
-<p>If you report a problem with a question, or mark questions as a reviewer, the app sends the report to our server (run on Cloudflare) when you are online: the question code, the problems you picked and your note, the answer you chose, the app version, the name in your Qanun profile and a random code that identifies your copy of the app. Nothing else from the app is sent. We use reports only to correct the question bank. You can also send reports by email or WhatsApp instead. To have your reports deleted, write to doctorkhanawais@gmail.com.</p>
+<p>If you report a problem with a question, or mark questions as a reviewer, the app sends the report to our server when you are online: the question code, the problems you picked and your note, the answer you chose, the app version, the name in your Qanun profile and a random code for your copy of the app. We use reports only to correct the question bank. You can also send reports by email or WhatsApp instead.</p>
 
 <h2>Permissions</h2>
-<p>The Android app asks only for internet access. It opens files only when you pick them (to import a book or restore a backup), and saves files only when you ask (exports and backups to Downloads).</p>
+<p>The Android app asks only for internet access. It opens files only when you pick them (to import a book or restore a backup), and saves files only when you ask (exports and backups).</p>
 
-<h2>Children</h2>
-<p>Qanun is made for medical students and doctors. It is not directed at children, and we do not knowingly collect information from anyone under 18.</p>
+<h2>Who can use Qanun</h2>
+<p>Qanun is for medical and dental students and doctors aged 17 or over. Many students begin medical or dental college at 17, so 17-year-olds may use Qanun with the agreement of a parent or guardian. Qanun is not directed at children, and we do not knowingly collect information from anyone under 17. If you believe someone under 17 has given us information, write to us and we will delete it.</p>
 
-<h2>Deleting your information</h2>
-<p>Because your information is on your device, you control it. Use Settings, Privacy and data, Delete my data, or uninstall the app; both remove it from the device. Copies you saved yourself (backups, exports) stay until you delete them. To remove a licence record, write to us.</p>
+<h2>How long we keep information</h2>
+<p>Account, device and plan records are kept while your account is open. Daily free-question records and AI usage counts are kept only as long as the limits need them. Payment records are kept as long as the law requires for accounts. Reports are kept until the question has been corrected and checked.</p>
+
+<h2 id="delete">Deleting your account and information</h2>
+<ul>
+<li>On your device: use Settings, Privacy and data, Delete my data, or uninstall the app. Copies you saved yourself (backups, exports) stay until you delete them.</li>
+<li>On our server: write to <a href="mailto:doctorkhanawais@gmail.com">doctorkhanawais@gmail.com</a> from the email of your account and ask us to delete your account. We delete your account, devices, usage records and reports within 30 days, except payment records the law requires us to keep. Deleting your account does not cancel a Google Play subscription; cancel it in Google Play first.</li>
+</ul>
+
+<h2>Your rights</h2>
+<p>You can ask us for a copy of the information our server holds about you, ask us to correct it, or ask us to delete it, by writing to the email above. If you live in the European Union or the United Kingdom, you also have the rights given by data protection law there, including the right to complain to your data protection authority.</p>
 
 <h2>Changes to this policy</h2>
 <p>If this policy changes, the new version will be posted on this page with a new date. Important changes will also be shown in the app.</p>
 </main>
-<footer><div class="in"><span>© 2026 Dr. Owais Nawaz Khan</span><a href="./">Qanun</a><a href="mailto:doctorkhanawais@gmail.com">doctorkhanawais@gmail.com</a></div></footer>
+<footer><div class="in"><span>© 2026 Dr. Owais Nawaz Khan</span><a href="./">Qanun</a><a href="pricing.html">Pricing</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a><a href="mailto:doctorkhanawais@gmail.com">doctorkhanawais@gmail.com</a></div></footer>
 </body>
 </html>
