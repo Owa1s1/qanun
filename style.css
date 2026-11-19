@@ -144,3 +144,10 @@ header .menu svg { width: 26px; height: 26px; }
   .btns .btn { flex: 1 1 100%; justify-content: center; }
   footer .in { flex-direction: column; gap: 6px; }
 }
+/* exams in Qanun (7 Nov 2026) */
+.examrow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 22px 0 28px; }
+@media (max-width: 900px) { .examrow { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .examrow { grid-template-columns: 1fr; } }
+.exambox { border: 1px solid rgba(255,255,255,.35); border-radius: 14px; padding: 16px 18px; background: rgba(255,255,255,.06); }
+.exambox b { display: block; font: 600 17px/1.3 Inter, system-ui, sans-serif; margin-bottom: 6px; }
+.exambox span { color: var(--onDeepSub); font-size: 14.5px; line-height: 1.5; }

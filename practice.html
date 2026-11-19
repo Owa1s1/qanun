@@ -122,7 +122,7 @@ function doneScreen() {
   show(h('div', { class: 'card' },
     h('h1', { class: 'serif' }, 'That is your free set for today'),
     tally.total ? h('p', {}, `This visit you answered ${tally.right} of ${tally.total} correctly.`) : null,
-    h('p', {}, 'Your free questions start again tomorrow. For the whole question bank (more than 7,400 questions for MBBS, BDS, FCPS Part 1 and PGMI), Ask Avicenna, flashcards, your own library and more, get Qanun with a Student or Clinician plan.'),
+    h('p', {}, 'Your free questions start again tomorrow. For the whole question bank (more than 8,700 questions for MBBS, BDS, FCPS Part 1 and PGMI), Ask Avicenna, flashcards, your own library and more, get Qanun with a Student or Clinician plan.'),
     h('div', { class: 'row' }, h('a', { class: 'btn primary', href: 'pricing.html' }, 'See plans'), h('a', { class: 'btn plain', href: WA }, 'Buy on WhatsApp'), btn('Sign out', () => signOut(auth), 'plain'))));
 }
 function paidScreen() {
