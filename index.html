@@ -30,7 +30,16 @@
       <a class="btn ghost" href="practice.html">Try 10 free questions</a>
     </div>
   </div>
-  <div class="phone"><img src="img/answer.jpg" alt="A Qanun question with the correct answer and its explanation" width="540" height="960"></div>
+  <div class="vid">
+    <!-- 26 Nov 2026: the 45-second Google Play promo video. The YouTube player loads only when the visitor presses play
+         (privacy-enhanced youtube-nocookie domain), so the page stays fast and sets no YouTube cookies until then. -->
+    <button class="vidbtn" type="button" aria-label="Play the 45-second video about Qanun"
+      onclick="var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/p3f-rPxvmuI?autoplay=1&rel=0&modestbranding=1';f.title='Qanun in 45 seconds';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;this.replaceWith(f)">
+      <img src="https://i.ytimg.com/vi/p3f-rPxvmuI/maxresdefault.jpg" alt="" width="1280" height="720" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/p3f-rPxvmuI/hqdefault.jpg'">
+      <span class="vidplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+      <span class="vidcap">Qanun in 45 seconds</span>
+    </button>
+  </div>
 </div></div>
 
 <section id="features"><div class="wrap">

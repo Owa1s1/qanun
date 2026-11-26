@@ -151,3 +151,33 @@ header .menu svg { width: 26px; height: 26px; }
 .exambox { border: 1px solid rgba(255,255,255,.35); border-radius: 14px; padding: 16px 18px; background: rgba(255,255,255,.06); }
 .exambox b { display: block; font: 600 17px/1.3 Inter, system-ui, sans-serif; margin-bottom: 6px; }
 .exambox span { color: var(--onDeepSub); font-size: 14.5px; line-height: 1.5; }
+
+/* Hero video (26 Nov 2026): text on top, the 45-second video below it, full width of the page. */
+.hero .wrap { grid-template-columns: 1fr; align-items: start; gap: 0; }
+.hero .copy { max-width: 760px; padding-bottom: 34px; }
+.hero .vid { width: 100%; max-width: 900px; justify-self: center; aspect-ratio: 16 / 9; border-radius: 16px 16px 0 0; overflow: hidden; box-shadow: 0 0 0 6px #0A1E26, 0 30px 60px rgba(0,0,0,.45); background: #0A1E26; }
+.hero .vid iframe, .vidbtn { display: block; width: 100%; height: 100%; border: 0; }
+.vidbtn { position: relative; padding: 0; cursor: pointer; background: #0A1E26; }
+.vidbtn img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .92; transition: opacity .2s; }
+.vidbtn:hover img, .vidbtn:focus-visible img { opacity: 1; }
+.vidplay { position: absolute; left: 50%; top: 50%; width: 78px; height: 78px; margin: -39px 0 0 -39px; border-radius: 50%; background: rgba(255,255,255,.94); color: #0F3440; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.35); transition: transform .15s; }
+.vidplay svg { width: 34px; height: 34px; margin-left: 4px; }
+.vidbtn:hover .vidplay { transform: scale(1.06); }
+.vidcap { position: absolute; left: 16px; bottom: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(10,30,38,.78); color: #fff; font-size: 14px; font-weight: 500; }
+@media (max-width: 820px) { .hero .vid { border-radius: 12px 12px 0 0; box-shadow: 0 0 0 4px #0A1E26, 0 20px 40px rgba(0,0,0,.4); } .vidplay { width: 62px; height: 62px; margin: -31px 0 0 -31px; } }
+.hero .vid .vidbtn { border: 0 !important; border-radius: 0; outline-offset: -4px; }
+/* Hero animation (26 Nov 2026, owner): the background light drifts slowly, the words and buttons rise in one after
+   another, the video lifts in last, and the play button breathes. Calm on purpose; switched off for visitors who
+   ask their device for reduced motion. */
+.hero { position: relative; isolation: isolate; }
+.hero::before, .hero::after { content: ''; position: absolute; z-index: -1; border-radius: 50%; filter: blur(60px); pointer-events: none; }
+.hero::before { width: 520px; height: 520px; left: -120px; top: -140px; background: radial-gradient(circle, rgba(46,143,166,.55), transparent 65%); animation: heroDrift1 18s ease-in-out infinite alternate; }
+.hero::after { width: 460px; height: 460px; right: -100px; top: 120px; background: radial-gradient(circle, rgba(201,146,46,.28), transparent 65%); animation: heroDrift2 22s ease-in-out infinite alternate; }
+@keyframes heroDrift1 { from { transform: translate(0, 0) scale(1); } to { transform: translate(160px, 90px) scale(1.15); } }
+@keyframes heroDrift2 { from { transform: translate(0, 0) scale(1); } to { transform: translate(-140px, -60px) scale(1.1); } }
+@keyframes heroRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.hero h1, .hero p.lead, .hero .who, .hero .btns, .hero .vid { animation: heroRise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero p.lead { animation-delay: .15s; } .hero .who { animation-delay: .3s; } .hero .btns { animation-delay: .45s; } .hero .vid { animation-delay: .65s; animation-duration: 1s; }
+@keyframes playPulse { 0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 0 0 0 rgba(255,255,255,.45); } 50% { box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 0 0 16px rgba(255,255,255,0); } }
+.vidplay { animation: playPulse 2.4s ease-in-out 1.6s infinite; }
+@media (prefers-reduced-motion: reduce) { .hero::before, .hero::after, .vidplay, .hero h1, .hero p.lead, .hero .who, .hero .btns, .hero .vid { animation: none !important; } }
