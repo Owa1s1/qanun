@@ -24,8 +24,8 @@
   {"@type":"Question","name":"Is Qanun free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every day you get 10 new questions from the free set with full explanations and Avicenna's ready answers, two books in your library, up to 40 flashcards, lab values and one research project. A Student or Clinician plan opens the whole question bank."}},
   {"@type":"Question","name":"Which exams does Qanun cover?","acceptedAnswer":{"@type":"Answer","text":"MBBS from first year to final year, BDS for every year, FCPS Part 1 (Paper I for every specialty and Paper II for the main groups) and the PGMI entrance test for residency in Khyber Pakhtunkhwa. USMLE, PLAB and AMC sets are coming."}},
   {"@type":"Question","name":"Who writes and checks the questions?","acceptedAnswer":{"@type":"Answer","text":"The questions are original, written for Qanun and checked against standard textbooks and current guidelines. Doctors and dentists are reviewing them, and every question has a button to report a problem."}},
-  {"@type":"Question","name":"Can I use Qanun on an iPhone or a Mac?","acceptedAnswer":{"@type":"Answer","text":"Yes, online at app.alqanun.pk in Safari or Chrome, with nothing to install. Apps for Windows and Android can be downloaded now; App Store versions are on the way."}},
-  {"@type":"Question","name":"How do I pay for a plan?","acceptedAnswer":{"@type":"Answer","text":"In Pakistan you can pay by Easypaisa, JazzCash, NayaPay, SadaPay or bank transfer: message us on WhatsApp or use the contact form. In the Android app, plans are sold through Google Play."}}
+  {"@type":"Question","name":"Can I use Qanun on an iPhone, iPad or Mac?","acceptedAnswer":{"@type":"Answer","text":"Yes. Open app.alqanun.pk in Safari or Chrome and use it online, or install it as a web app with Add to Home Screen (on a Mac, Add to Dock). App Store versions for iPhone, iPad and Mac are on the way; Windows and Android apps can be downloaded now."}},
+  {"@type":"Question","name":"How do I pay for a plan?","acceptedAnswer":{"@type":"Answer","text":"In the Android app, plans are sold through Google Play. On Windows, iPhone, Mac or the web, contact Dr. Owais on WhatsApp (+92 334 1910206) or at support@alqanun.pk and pay by Easypaisa, JazzCash, NayaPay, SadaPay or bank transfer."}}
  ]}
 ]}
 </script>
@@ -33,7 +33,7 @@
 <link rel="icon" href="icon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261127b">
+<link rel="stylesheet" href="style.css?v=20261127c">
 </head>
 <body>
 <header><div class="in">
@@ -117,7 +117,7 @@
   <div><b>9,489</b><span>questions</span></div>
   <div><b>4</b><span>exams: MBBS, BDS, FCPS Part 1, PGMI</span></div>
   <div><b>Every option</b><span>explained</span></div>
-  <div><b>3 ways</b><span>Windows, Android and online</span></div>
+  <div><b>Every platform</b><span>Windows, Android, iPhone, iPad, Mac and online</span></div>
 </div></div>
 
 <section id="features"><div class="wrap">
@@ -125,49 +125,54 @@
   <p class="intro center">Everything works on your phone, tablet or computer, and your work stays on your own device.</p>
 
   <div class="fgrid">
-    <article class="fcard"><div class="shot"><img src="img/avicenna.jpg" alt="Avicenna, Qanun's guide, reading a book" loading="lazy" width="540" height="960"></div>
+    <article class="fcard"><div class="shot"><img src="img/avicenna.jpg?v=27b" alt="Ask Avicenna beside a question, showing his Exam recap" loading="lazy" width="540" height="960"></div>
       <h3>Ask Avicenna, your tutor</h3><p>The mechanism, the bedside picture, the exam trap, a quick test or the same explanation in Urdu. Ready instantly on the free questions; on every question with a plan.</p></article>
-    <article class="fcard"><div class="shot"><img src="img/bank.jpg" alt="The Qanun question bank with subject tiles" loading="lazy" width="540" height="960"></div>
+    <article class="fcard"><div class="shot"><img src="img/bank.jpg?v=27b" alt="The Qanun question bank with subject tiles" loading="lazy" width="540" height="960"></div>
       <h3>One question bank for every exam</h3><p>Original questions for every MBBS year, BDS, FCPS Part 1 and the PGMI entrance test, from easy to extreme, with real lab values and reference ranges.</p></article>
-    <article class="fcard"><div class="shot"><img src="img/answer.jpg" alt="An answered question with explanations" loading="lazy" width="540" height="960"></div>
+    <article class="fcard"><div class="shot"><img src="img/answer.jpg?v=27b" alt="An answered question: the wrong pick in red with its own explanation, and the correct answer with the full explanation" loading="lazy" width="540" height="960"></div>
       <h3>An explanation for every option</h3><p>Not just the right answer: each wrong option says why it does not fit this patient, with key clues underlined, short notes on terms, tables and figures.</p></article>
   </div>
 
   <div class="exams">
     <h3 class="center">Built for the exam you are taking</h3>
     <div class="etabs" role="tablist" aria-label="Exams">
-      <button type="button" role="tab" aria-selected="true" aria-controls="ex-pgmi" id="t-pgmi">PGMI</button>
+      <button type="button" role="tab" aria-selected="true" aria-controls="ex-mbbs" id="t-mbbs">MBBS</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="ex-pgmi" id="t-pgmi">PGMI</button>
       <button type="button" role="tab" aria-selected="false" aria-controls="ex-fcps" id="t-fcps">FCPS Part 1</button>
       <button type="button" role="tab" aria-selected="false" aria-controls="ex-bds" id="t-bds">BDS</button>
     </div>
-    <div class="epanel" role="tabpanel" id="ex-pgmi" aria-labelledby="t-pgmi">
+    <div class="epanel" role="tabpanel" id="ex-mbbs" aria-labelledby="t-mbbs">
+      <p>Every MBBS subject from first year to final year, for KMU, UHS and the other Pakistani universities: anatomy, physiology and biochemistry; pathology, pharmacology, microbiology, forensic medicine and community medicine; medicine, surgery, paediatrics, obstetrics and gynaecology, eye and ENT. Pick a subject, keep the chapters you need, and start.</p>
+      <div class="wshot"><img src="img/mbbs-desktop.jpg?v=27b" alt="The MBBS section of the Qanun question bank on a computer, with subject tiles for every year" loading="lazy" width="1280" height="847"></div>
+    </div>
+    <div class="epanel" role="tabpanel" id="ex-pgmi" aria-labelledby="t-pgmi" hidden>
       <p>Prepare for the PGMI test for residency in Khyber Pakhtunkhwa. Choose the medical, surgical or dental stream and take 100-question mock tests in the official mix: applied basic sciences, your clinical stream, English, bioethics, biostatistics and communication skills.</p>
-      <div class="wshot"><img src="img/pgmi-desktop.jpg" alt="The PGMI section on a computer: medical, surgical and dental streams, the mixed set and the 100-question mock test" loading="lazy" width="1280" height="847"></div>
+      <div class="wshot"><img src="img/pgmi-desktop.jpg?v=27b" alt="The PGMI section on a computer: medical, surgical and dental streams, the mixed set and the 100-question mock test" loading="lazy" width="1280" height="847"></div>
     </div>
     <div class="epanel" role="tabpanel" id="ex-fcps" aria-labelledby="t-fcps" hidden>
       <p>Paper I for every specialty, and Paper II for medicine and allied, surgery and allied, obstetrics and gynaecology, paediatrics and dentistry. Practise one paper at a time, chapter by chapter, with an explanation for every option.</p>
-      <div class="wshot"><img src="img/fcps-desktop.jpg" alt="FCPS Part 1 in the Qanun question bank on a computer, with subject tiles" loading="lazy" width="1280" height="847"></div>
+      <div class="wshot"><img src="img/fcps-desktop.jpg?v=27b" alt="FCPS Part 1 in the Qanun question bank on a computer, with subject tiles" loading="lazy" width="1280" height="847"></div>
     </div>
     <div class="epanel" role="tabpanel" id="ex-bds" aria-labelledby="t-bds" hidden>
       <p>Every BDS subject for KMU and UHS, from 1st year to the final year: oral biology and dental materials; oral pathology, periodontology, oral medicine and community dentistry; operative dentistry, oral surgery, prosthodontics and orthodontics. Dentists are reviewing the questions.</p>
-      <div class="wshot"><img src="img/bds-desktop.jpg" alt="The BDS section of the Qanun question bank on a computer" loading="lazy" width="1280" height="847"></div>
+      <div class="wshot"><img src="img/bds-desktop.jpg?v=27b" alt="The BDS section of the Qanun question bank on a computer" loading="lazy" width="1280" height="847"></div>
     </div>
   </div>
 
   <h3 class="center gtitle">Beyond the question bank</h3>
   <div class="fgrid">
-    <article class="fcard"><div class="shot"><img src="img/reader.jpg" alt="The book reader" loading="lazy" width="540" height="960"></div>
+    <article class="fcard"><div class="shot"><img src="img/reader.jpg?v=27b" alt="The library with shelves of books: USMLE Step 1 and clinical books" loading="lazy" width="540" height="960"></div>
       <h3>Your own books, in one library</h3><p>Read the PDF, EPUB and Word books you already have, with highlights and notes. Turn highlights into flashcards with spaced repetition, or import your Anki decks.</p></article>
-    <article class="fcard"><div class="shot"><img src="img/labs.jpg" alt="Lab reference values" loading="lazy" width="540" height="960"></div>
+    <article class="fcard"><div class="shot"><img src="img/labs.jpg?v=27b" alt="Lab reference values" loading="lazy" width="540" height="960"></div>
       <h3>Lab values and a calculator</h3><p>Reference ranges in conventional and SI units, bedside formulas, and a companion that answers from your books, current guidelines and PubMed.</p></article>
-    <article class="fcard"><div class="shot"><img src="img/research.jpg" alt="Research study types" loading="lazy" width="540" height="960"></div>
+    <article class="fcard"><div class="shot"><img src="img/research.jpg?v=27b" alt="Research study types" loading="lazy" width="540" height="960"></div>
       <h3>Research, step by step</h3><p>Eight kinds of study, from a case report to a systematic review, each with its own steps, guidance and a worked example, ending in a manuscript.</p></article>
   </div>
 
   <div class="wide1">
     <h3>Free medical books, for everyone</h3>
     <p>Openly licensed textbooks from OpenStax, such as Anatomy and Physiology, Microbiology and Pharmacology, download into your library with one click. Classics such as Clinical Methods, StatPearls and WHO guidance open on the publisher's own website inside Qanun. Free with or without a plan, in Qanun for Windows now and coming to the phone app.</p>
-    <div class="wshot"><img src="img/free-books-desktop.jpg" alt="Free medical books in the Qanun library: open textbooks to download and free books to read" loading="lazy" width="1280" height="847"></div>
+    <div class="wshot"><img src="img/free-books-desktop.jpg?v=27b" alt="Free medical books in the Qanun library: open textbooks to download and free books to read" loading="lazy" width="1280" height="847"></div>
   </div>
 </div></section>
 
@@ -186,7 +191,7 @@
 <section id="devices"><div class="wrap">
   <h2 class="center">On your phone, tablet and computer</h2>
   <p class="intro center">Install Qanun on Windows or Android, or use it online on an iPhone, iPad or Mac. The same Qanun everywhere, laid out for the screen you are using.</p>
-  <div class="devshot flat solo"><img src="img/desk-answer.jpg" alt="Qanun on a computer, showing a question and its explanation" loading="lazy" width="1280" height="800"></div>
+  <div class="devshot flat solo"><img src="img/desk-answer.jpg?v=27b" alt="Qanun on a computer, showing a question and its explanation" loading="lazy" width="1280" height="800"></div>
   <div class="btns center" style="margin-top:22px"><a class="btn" href="devices.html">See Qanun on each device</a><a class="btn" href="download.html">Download Qanun</a><a class="btn" href="https://app.alqanun.pk">Use Qanun online</a></div>
 </div></section>
 
@@ -210,8 +215,8 @@
   <details><summary>Is Qanun free?</summary><p>Yes. Every day you get 10 new questions from the free set with full explanations and Avicenna's ready answers, two books in your library, up to 40 flashcards, lab values and one research project. A Student or Clinician plan opens the whole question bank.</p></details>
   <details><summary>Which exams does Qanun cover?</summary><p>MBBS from first year to final year, BDS for every year, FCPS Part 1 (Paper I for every specialty and Paper II for the main groups) and the PGMI entrance test for residency in Khyber Pakhtunkhwa. USMLE, PLAB and AMC sets are coming.</p></details>
   <details><summary>Who writes and checks the questions?</summary><p>The questions are original, written for Qanun and checked against standard textbooks and current guidelines. Doctors and dentists are reviewing them, and every question has a button to report a problem.</p></details>
-  <details><summary>Can I use Qanun on an iPhone or a Mac?</summary><p>Yes, online at <a href="https://app.alqanun.pk">app.alqanun.pk</a> in Safari or Chrome, with nothing to install. Apps for Windows and Android can be <a href="download.html">downloaded</a> now; App Store versions are on the way.</p></details>
-  <details><summary>How do I pay for a plan?</summary><p>In Pakistan you can pay by Easypaisa, JazzCash, NayaPay, SadaPay or bank transfer: message us on WhatsApp or use the form below. In the Android app, plans are sold through Google Play.</p></details>
+  <details><summary>Can I use Qanun on an iPhone, iPad or Mac?</summary><p>Yes. Open <a href="https://app.alqanun.pk">app.alqanun.pk</a> in Safari or Chrome and use it online, or install it as a web app: in Safari tap Share, then Add to Home Screen (on a Mac, File, then Add to Dock), and Qanun opens like any other app.</p><p>App Store versions for iPhone, iPad and Mac are on the way. Windows and Android apps can be <a href="download.html">downloaded</a> now.</p></details>
+  <details><summary>How do I pay for a plan?</summary><p>In the Android app, plans are sold through Google Play.</p><p>On Windows, iPhone, Mac or the web, contact Dr. Owais on <a href="https://wa.me/923341910206?text=Assalam%20Waalaikum%2C%20I%20would%20like%20to%20buy%20a%20Qanun%20Subscription">WhatsApp</a> or by email at <a href="mailto:support@alqanun.pk">support@alqanun.pk</a> (or use the form below), and pay by Easypaisa, JazzCash, NayaPay, SadaPay or bank transfer. Your plan is switched on as soon as the payment arrives.</p></details>
 </div></section>
 
 <section id="contact" class="band"><div class="wrap">
