@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /reports.html
+Disallow: /*.before-
+
+Sitemap: https://alqanun.pk/sitemap.xml

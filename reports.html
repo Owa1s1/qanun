@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Qanun reports</title>
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+main { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
+h1 { font: 400 30px/1.2 'Libre Baskerville', Georgia, serif; margin: 0 0 6px; }
+.sub { color: var(--sub); font-size: 15px; }
+.box { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin: 14px 0; }
+input[type=password] { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--line); font: inherit; background: var(--bg); color: var(--text); margin: 8px 0; }
+button { font: inherit; font-weight: 600; padding: 10px 16px; border-radius: 10px; border: 0; background: var(--accent); color: #fff; cursor: pointer; }
+button.ghost { background: none; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.seg { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+.seg button.on { background: var(--deep); }
+.seg button:not(.on) { background: none; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.code { font: 600 17px ui-monospace, Consolas, monospace; }
+.tag { display: inline-block; font-size: 13px; padding: 2px 9px; border-radius: 99px; background: rgba(11,130,122,.12); color: var(--ink); margin: 2px 4px 2px 0; }
+.tag.hot { background: rgba(200,60,40,.14); color: #B23A26; }
+.note { border-left: 3px solid var(--line); padding: 4px 0 4px 10px; margin: 8px 0; font-size: 15px; }
+.note b { font-weight: 600; }
+.note .when { color: var(--sub); font-size: 13px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+td, th { text-align: left; padding: 7px 6px; border-bottom: 1px solid var(--line); }
+.err { color: #B23A26; }
+</style>
+</head>
+<body>
+<header><div class="in"><a class="brand" href="./"><img src="icon.png" alt=""><b>QANUN</b></a></div></header>
+<main>
+  <h1>Question reports</h1>
+  <p class="sub">For Dr. Owais only. Read here; mark fixes and correct questions on the PC.</p>
+  <div class="box" id="login">
+    <b>Owner key</b>
+    <input type="password" id="key" placeholder="Paste the OWNER_KEY" autocomplete="off">
+    <label class="sub"><input type="checkbox" id="remember" checked> Remember on this device</label>
+    <div style="margin-top:10px"><button id="go">Show reports</button> <span id="msg" class="err"></span></div>
+  </div>
+  <div id="out" hidden>
+    <div class="seg" id="seg"></div>
+    <div id="list"></div>
+    <div class="box"><b>Reviewers</b><div id="people" style="margin-top:8px"></div></div>
+    <p><button class="ghost" id="refresh">Refresh</button> <button class="ghost" id="forget">Forget the key on this device</button></p>
+  </div>
+</main>
+<script>
+const API = 'https://api.alqanun.pk/v1/feedback';
+const KIND = { wrong: 'Wrong answer', two: 'Two answers could be right', giveaway: 'Gives the answer away', unclear: 'Unclear or confusing', fact: 'A fact or value is wrong', outdated: 'Outdated', typo: 'Typo or wording' };
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const day = (t) => { const d = new Date(t); return isNaN(d) ? '' : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); };
+let rows = [], people = [], filter = 'open';
+function build(files) {
+  const by = new Map(); people = [];
+  for (const raw of files) {
+    let f; try { f = typeof raw === 'string' ? JSON.parse(raw) : raw; } catch { continue; }
+    if (!f || !Array.isArray(f.items)) continue;
+    const who = (f.reviewerLicence && f.reviewerLicence.name) || f.from || 'Someone';
+    let ok = 0, bad = 0, last = f.made || '';
+    for (const x of f.items) {
+      if (x.via === 'review' && x.verdict === 'ok') { ok++; continue; }
+      if (!x.code) continue; bad++;
+      const r = by.get(x.code) || { code: x.code, who: new Set(), kinds: {}, notes: [], picks: {} }; by.set(x.code, r);
+      r.who.add(who); for (const k of x.kinds || []) r.kinds[k] = (r.kinds[k] || 0) + 1;
+      if (x.pick) r.picks[x.pick] = (r.picks[x.pick] || 0) + 1;
+      r.notes.push({ who, note: x.note || '', at: x.at, via: x.via, app: x.app || f.app || '' });
+      if (x.at > last) last = x.at;
+    }
+    people.push({ who, app: f.app || '', ok, bad, last });
+  }
+  rows = [...by.values()].map((r) => ({ ...r, n: r.who.size, sameWrong: Object.values(r.picks).some((v) => v >= 2) }))
+    .sort((a, b) => (b.n + b.sameWrong) - (a.n + a.sameWrong) || a.code.localeCompare(b.code));
+  people.sort((a, b) => String(b.last).localeCompare(String(a.last)));
+}
+function draw() {
+  const two = rows.filter((r) => r.n >= 2 || r.sameWrong);
+  $('seg').innerHTML = [['open', 'All reported (' + rows.length + ')'], ['two', 'Flagged by 2 or more (' + two.length + ')']].map(([k, l]) => `<button class="${filter === k ? 'on' : ''}" data-k="${k}">${l}</button>`).join('');
+  const list = filter === 'two' ? two : rows;
+  $('list').innerHTML = list.length ? list.map((r) => `<div class="box">
+      <div><span class="code">${esc(r.code.toUpperCase())}</span> &nbsp;<span class="tag${r.n >= 2 ? ' hot' : ''}">${r.n} ${r.n === 1 ? 'person' : 'people'}</span>${r.sameWrong ? '<span class="tag hot">same wrong option picked by 2+</span>' : ''}</div>
+      <div style="margin-top:6px">${Object.entries(r.kinds).map(([k, v]) => `<span class="tag">${esc(KIND[k] || k)}${v > 1 ? ' ×' + v : ''}</span>`).join('')}${Object.keys(r.picks).length ? `<span class="tag">picked ${Object.entries(r.picks).map(([p, v]) => esc(p) + (v > 1 ? ' ×' + v : '')).join(', ')}</span>` : ''}</div>
+      ${r.notes.map((n) => `<div class="note"><b>${esc(n.who)}</b> <span class="when">${esc(day(n.at))} · ${n.via === 'review' ? 'review' : 'report'}${n.app ? ' · Qanun ' + esc(n.app) : ''}</span>${n.note ? '<div>' + esc(n.note) + '</div>' : ''}</div>`).join('')}
+    </div>`).join('') : '<div class="box">Nothing here yet.</div>';
+  $('people').innerHTML = people.length ? `<table><tr><th>Name</th><th>Looks right</th><th>Problems</th><th>Last</th></tr>${people.map((p) => `<tr><td>${esc(p.who)}</td><td>${p.ok}</td><td>${p.bad}</td><td>${esc(day(p.last))}</td></tr>`).join('')}</table>` : '<span class="sub">No one has sent anything yet.</span>';
+}
+async function load(key) {
+  $('msg').textContent = '';
+  let r; try { r = await fetch(API, { headers: { authorization: 'Owner ' + key } }); } catch { $('msg').textContent = 'Could not reach the Qanun server.'; return; }
+  if (r.status === 401) { try { localStorage.removeItem('qanun_owner_key'); } catch {} $('login').hidden = false; $('out').hidden = true; $('msg').textContent = 'That owner key was not accepted.'; return; }
+  if (!r.ok) { $('msg').textContent = 'The server did not send the reports.'; return; }
+  const j = await r.json(); build(j.files || []);
+  if ($('remember').checked) try { localStorage.setItem('qanun_owner_key', key); } catch {}
+  $('login').hidden = true; $('out').hidden = false; draw();
+}
+$('go').onclick = () => { const k = $('key').value.trim(); if (k) load(k); };
+$('key').onkeydown = (e) => { if (e.key === 'Enter') $('go').click(); };
+$('seg').onclick = (e) => { const k = e.target.dataset && e.target.dataset.k; if (k) { filter = k; draw(); } };
+$('refresh').onclick = () => { let k = ''; try { k = localStorage.getItem('qanun_owner_key') || ''; } catch {} k = k || $('key').value.trim(); if (k) load(k); };
+$('forget').onclick = () => { try { localStorage.removeItem('qanun_owner_key'); } catch {} $('key').value = ''; $('out').hidden = true; $('login').hidden = false; };
+try { const k = localStorage.getItem('qanun_owner_key'); if (k) load(k); } catch {}
+</script>
+</body>
+</html>

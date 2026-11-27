@@ -4,10 +4,15 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Free daily questions · Qanun</title>
 <meta name="description" content="Try Qanun on the web: 10 free medical exam questions a day with full explanations. Sign in with Google.">
+<link rel="canonical" href="https://alqanun.pk/practice.html">
+<meta property="og:url" content="https://alqanun.pk/practice.html">
+<meta property="og:site_name" content="Qanun">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://alqanun.pk/img/og.png">
 <link rel="icon" href="icon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20261127b">
 <style>
   :root { --ok: #1F8A4C; --okbg: #E4F4EA; --bad: #B3402E; --badbg: #FBEAE6; }
   @media (prefers-color-scheme: dark) { :root { --ok: #5CCB8A; --okbg: #12372A; --bad: #F08A78; --badbg: #3C1F1A; } }
@@ -49,7 +54,7 @@
 </div></header>
 <main><div id="app"><p class="note">Loading…</p></div>
 <p class="note" style="margin-top:22px">Qanun is for education and exam preparation. It is not medical advice and does not replace a clinician's judgement. <a href="privacy.html">Privacy policy</a></p></main>
-<footer><div class="in"><span>© 2026 Dr. Owais Nawaz Khan</span><a href="pricing.html">Pricing</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a><a href="#delete-account">Delete my account</a><a href="mailto:doctorkhanawais@gmail.com">doctorkhanawais@gmail.com</a></div></footer>
+<footer><div class="in"><span>© 2026 Dr. Owais Nawaz Khan</span><a href="pricing.html">Pricing</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a><a href="#delete-account">Delete my account</a><a href="mailto:support@alqanun.pk">support@alqanun.pk</a></div></footer>
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
@@ -230,7 +235,7 @@ function deletedScreen() {
   history.replaceState(null, '', location.pathname);
   show(h('div', { class: 'card' }, h('h1', { class: 'serif' }, 'Your account has been deleted'),
     h('p', {}, 'Your Qanun account and its records have been removed from our server. Thank you for trying Qanun.'),
-    h('p', { class: 'note' }, 'Questions? Write to ', h('a', { href: 'mailto:doctorkhanawais@gmail.com' }, 'doctorkhanawais@gmail.com'), '.'),
+    h('p', { class: 'note' }, 'Questions? Write to ', h('a', { href: 'mailto:support@alqanun.pk' }, 'support@alqanun.pk'), '.'),
     h('div', { class: 'row' }, h('a', { class: 'btn primary', href: './' }, 'Back to Qanun'))));
 }
 window.addEventListener('hashchange', () => { if (wantsDelete() && auth.currentUser) deleteScreen(); else if (wantsDelete()) signInScreen(); });
