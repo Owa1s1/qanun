@@ -10,25 +10,73 @@
 <link rel="icon" href="icon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261126b">
+<link rel="stylesheet" href="style.css?v=20261127">
 </head>
 <body>
 <header><div class="in">
   <a class="brand" href="./"><img src="icon.png" alt=""><b>QANUN</b></a>
   <button class="menu" aria-label="Menu" aria-expanded="false" onclick="var h=this.closest('header'),o=h.classList.toggle('open');this.setAttribute('aria-expanded',o)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-  <nav onclick="if(event.target.tagName==='A')this.closest('header').classList.remove('open')"><a href="#features">Features</a><a href="#subjects" class="hide-s">Subjects</a><a href="#devices" class="hide-s">Devices</a><a href="pricing.html">Pricing</a><a href="practice.html">Try free</a><a href="download.html">Get Qanun</a></nav>
+  <nav onclick="if(event.target.tagName==='A')this.closest('header').classList.remove('open')"><a href="./#features">Features</a><a href="subjects.html" class="hide-s">Subjects</a><a href="devices.html" class="hide-s">Devices</a><a href="pricing.html">Pricing</a><a href="practice.html">Try free</a><a href="https://app.alqanun.pk">Use online</a><a href="download.html" class="navcta">Download Qanun</a></nav>
 </div></header>
 
 <div class="hero"><div class="wrap">
   <div class="copy">
-    <h1>From textbook to bedside</h1>
-    <p class="lead">A study app for medical students and doctors: more than 9,400 MBBS, BDS, FCPS Part 1 and PGMI questions, each with a full explanation for every option, Ask Avicenna to explain anything you are stuck on, flashcards, your own library and research guidance, in one place.</p>
+    <!-- 27 Nov 2026 (owner): the text slides through Qanun's features (and what is coming); the buttons stay put. -->
+    <div class="hslider" aria-roledescription="carousel" aria-label="What Qanun does">
+      <div class="hslides">
+      <div class="hslide on" role="group" aria-roledescription="slide" aria-label="1 of 11">
+        <h1>From textbook to bedside</h1>
+        <p class="lead">A study app for medical students and doctors: more than 9,400 MBBS, BDS, FCPS Part 1 and PGMI questions, each with a full explanation for every option, Ask Avicenna to explain anything you are stuck on, flashcards, your own library and research guidance, in one place.</p>
+      </div>
+      <div class="hslide" role="group" aria-roledescription="slide" aria-label="2 of 11" aria-hidden="true">
+        <span class="hpill">Question bank</span><h2>9,489 questions, an explanation for every option</h2>
+        <p class="lead">Original questions for every MBBS and BDS year, FCPS Part 1 and the PGMI entrance test, from easy to extreme. Each wrong option says why it does not fit this patient.</p>
+      </div>
+      <div class="hslide" role="group" aria-roledescription="slide" aria-label="3 of 11" aria-hidden="true">
+        <span class="hpill">PGMI</span><h2>PGMI mock tests in the official mix</h2>
+        <p class="lead">Medical, surgical and dental streams, with 100-question mock tests: applied basic sciences, your clinical stream, English, bioethics, biostatistics and communication skills.</p>
+      </div>
+      <div class="hslide" role="group" aria-roledescription="slide" aria-label="4 of 11" aria-hidden="true">
+        <span class="hpill">Ask Avicenna</span><h2>A tutor beside every question</h2>
+        <p class="lead">Avicenna explains the mechanism, how it looks at the bedside, the exam trap, a quick test of what you learned, or the same explanation in Urdu.</p>
+      </div>
+      <div class="hslide" role="group" aria-roledescription="slide" aria-label="5 of 11" aria-hidden="true">
+        <span class="hpill">Library and flashcards</span><h2>Your own books, notes and flashcards</h2>
+        <p class="lead">Read your PDF, EPUB and Word books with highlights and notes, turn highlights into flashcards with spaced repetition, and bring in your Anki decks.</p>
+      </div>
+      <div class="hslide" role="group" aria-roledescription="slide" aria-label="6 of 11" aria-hidden="true">
+        <span class="hpill">Research</span><h2>Research, from idea to manuscript</h2>
+        <p class="lead">Eight kinds of study, from a case report to a systematic review, each with its own steps, guidance and a worked example for every field.</p>
+      </div>
+      <div class="hslide" role="group" aria-roledescription="slide" aria-label="7 of 11" aria-hidden="true">
+        <span class="hpill">Everywhere</span><h2>On Windows, Android, and online</h2>
+        <p class="lead">Install Qanun on Windows or Android, or use it online in Safari or Chrome on an iPhone, iPad or Mac, with nothing to install.</p>
+      </div>
+      <div class="hslide" role="group" aria-roledescription="slide" aria-label="8 of 11" aria-hidden="true">
+        <span class="hpill soon">Coming soon</span><h2>USMLE, PLAB and AMC</h2>
+        <p class="lead">Question sets tuned to each exam are on the way.</p>
+      </div>
+      <div class="hslide" role="group" aria-roledescription="slide" aria-label="9 of 11" aria-hidden="true">
+        <span class="hpill soon">Coming soon</span><h2>The Qanun Medical Library</h2>
+        <p class="lead">Textbook-style chapters on every topic in the question bank, with the latest guidelines and management.</p>
+      </div>
+      <div class="hslide" role="group" aria-roledescription="slide" aria-label="10 of 11" aria-hidden="true">
+        <span class="hpill soon">Coming soon</span><h2>MedArcade</h2>
+        <p class="lead">Clinical case simulations: take the history, examine, order tests and manage the patient.</p>
+      </div>
+      <div class="hslide" role="group" aria-roledescription="slide" aria-label="11 of 11" aria-hidden="true">
+        <span class="hpill soon">Coming soon</span><h2>Your progress on every device</h2>
+        <p class="lead">Sign in once and your answers and flashcards follow you between your phone, computer and the web.</p>
+      </div>
+      </div>
+      <div class="hnav"><button type="button" class="harrow" data-go="-1" aria-label="Previous">&#8249;</button><span class="hdots"></span><button type="button" class="harrow" data-go="1" aria-label="Next">&#8250;</button></div>
+    </div>
     <p class="who">Made in Pakistan by Dr. Owais Nawaz Khan.</p>
     <div class="btns">
-      <a class="btn primary" href="download.html">Get Qanun</a>
-      <a class="btn ghost" href="#features">See what it does</a>
-      <a class="btn ghost" href="practice.html">Try 10 free questions</a>
+      <a class="btn primary" href="download.html">Download Qanun</a>
+      <a class="btn ghost" href="https://app.alqanun.pk">Use Qanun online</a>
     </div>
+    <p class="hsmall"><a href="practice.html">Or try 10 free questions, no sign-up</a></p>
   </div>
   <div class="vid">
     <!-- 26 Nov 2026: the 45-second Google Play promo video. The YouTube player loads only when the visitor presses play
@@ -79,81 +127,21 @@
 
 <section id="subjects" class="band"><div class="wrap">
   <h2>Every subject, every year</h2>
-  <p class="intro">MBBS from first year to final, BDS, FCPS Part 1 and the PGMI entrance test for residency in Khyber Pakhtunkhwa. Questions in the bank today; new ones arrive with each update.</p>
+  <p class="intro">MBBS from first year to final, BDS, FCPS Part 1 and the PGMI entrance test for residency in Khyber Pakhtunkhwa.</p>
   <div class="examrow">
     <div class="exambox"><b>MBBS</b><span>Every subject from first year to final year, chapter by chapter, for KMU, UHS and the other Pakistani universities.</span></div>
     <div class="exambox"><b>FCPS Part 1</b><span>Paper I for every specialty, and Paper II for medicine and allied, surgery and allied, obstetrics and gynaecology, paediatrics and dentistry. Practise one paper at a time.</span></div>
     <div class="exambox"><b>PGMI entrance test</b><span>Medical, surgical and dental streams, with 100-question mock tests in the official mix of subjects.</span></div>
     <div class="exambox"><b>BDS</b><span>Every year of BDS: oral biology, dental materials and the shared basic sciences for 1st and 2nd year; oral pathology, periodontology, oral medicine, community dentistry, dental pharmacology, and general medicine and surgery for BDS; and operative dentistry, oral surgery, prosthodontics and orthodontics for the final year.</span></div>
   </div>
-  <div class="ledger">
-    <div><span>Pathology</span><b>1,112</b></div>
-    <div><span>Biochemistry</span><b>724</b></div>
-    <div><span>Pharmacology</span><b>700</b></div>
-    <div><span>Medicine</span><b>680</b></div>
-    <div><span>Surgery</span><b>553</b></div>
-    <div><span>Anatomy</span><b>521</b></div>
-    <div><span>Physiology</span><b>517</b></div>
-    <div><span>Microbiology and immunology</span><b>444</b></div>
-    <div><span>Paediatrics</span><b>433</b></div>
-    <div><span>Operative dentistry</span><b>236</b></div>
-    <div><span>Oral pathology</span><b>232</b></div>
-    <div><span>Oral and maxillofacial surgery</span><b>214</b></div>
-    <div><span>Oral biology and tooth morphology</span><b>210</b></div>
-    <div><span>Prosthodontics</span><b>210</b></div>
-    <div><span>Community medicine</span><b>191</b></div>
-    <div><span>Dental materials</span><b>191</b></div>
-    <div><span>Obstetrics</span><b>184</b></div>
-    <div><span>General medicine (BDS)</span><b>180</b></div>
-    <div><span>Periodontology</span><b>176</b></div>
-    <div><span>General surgery (BDS)</span><b>171</b></div>
-    <div><span>Orthodontics</span><b>168</b></div>
-    <div><span>Oral medicine</span><b>160</b></div>
-    <div><span>Ophthalmology</span><b>126</b></div>
-    <div><span>Biostatistics and epidemiology</span><b>124</b></div>
-    <div><span>Community dentistry</span><b>124</b></div>
-    <div><span>ENT</span><b>119</b></div>
-    <div><span>Behavioural sciences and ethics</span><b>116</b></div>
-    <div><span>Forensic medicine</span><b>115</b></div>
-    <div><span>Gynaecology</span><b>115</b></div>
-    <div><span>Psychiatry</span><b>110</b></div>
-    <div><span>Dermatology</span><b>100</b></div>
-    <div><span>English language (PGMI)</span><b>100</b></div>
-    <div><span>Dental pharmacology</span><b>85</b></div>
-    <div><span>Communication skills (PGMI)</span><b>48</b></div>
-  </div>
-  <p class="ledger-foot">9,489 questions in all, as of 20 November 2026.</p>
-  <div class="soonrow">
-    <div class="soonbox"><b>USMLE, PLAB and AMC</b><span>Question sets tuned to each exam, coming in a future update.</span></div>
-    <div class="soonbox"><b>Reviewed by doctors and dentists</b><span>Every subject is complete. Doctors and dentists are now reviewing the questions, and each update adds their corrections.</span></div>
-  </div>
+  <div class="btns" style="margin-top:22px"><a class="btn primary" href="subjects.html">See every subject and question count</a></div>
 </div></section>
 
 <section id="devices"><div class="wrap">
   <h2>On your phone, tablet and computer</h2>
-  <p class="intro">The same Qanun everywhere, laid out for the screen you are using. Your questions, books and notes stay on your own device.</p>
-
-  <div class="dev">
-    <div class="devshot"><img src="img/tab-chapters.jpg" alt="Choosing chapters on a tablet" loading="lazy" width="1200" height="740"></div>
-    <div><h3>Tablet: pick exactly what you want to revise</h3><p>Open a subject, keep the chapters you need and switch off the rest, then start a set of 10, 20 or 40. The wide layout puts your progress and your mistakes beside the bank.</p></div>
-  </div>
-
-  <div class="dev">
-    <div class="devshot"><img src="img/tab-labs.jpg" alt="Lab reference values on a tablet" loading="lazy" width="1200" height="740"></div>
-    <div><h3>Tablet: lab values beside your work</h3><p>Reference ranges in conventional and SI units slide in over any screen, with a bedside calculator and the formulas you use on the ward.</p></div>
-  </div>
-
-  <div class="dev">
-    <div class="devshot flat"><img src="img/pc-library.jpg" alt="The library on a computer" loading="lazy" width="1600" height="900"></div>
-    <div><h3>Computer: your library on shelves</h3><p>Your PDF, EPUB and Word books, sorted onto shelves you name, with highlights, notes and a reader built for long sessions.</p></div>
-  </div>
-
-  <div class="dev">
-    <div class="devshot flat"><img src="img/pc-research.jpg" alt="Research study types on a computer" loading="lazy" width="1600" height="900"></div>
-    <div><h3>Computer: research, step by step</h3><p>Eight kinds of study, each broken into its own standard steps, with guidance and a worked example for every field.</p></div>
-  </div>
-
+  <p class="intro">Install Qanun on Windows or Android, or use it online on an iPhone, iPad or Mac. The same Qanun everywhere, laid out for the screen you are using.</p>
   <div class="devshot flat solo"><img src="img/desk-answer.jpg" alt="Qanun on a computer, showing a question and its explanation" loading="lazy" width="1280" height="800"></div>
+  <div class="btns" style="margin-top:22px"><a class="btn dark" href="devices.html">See Qanun on each device</a><a class="btn dark" href="download.html">Download Qanun</a><a class="btn dark" href="https://app.alqanun.pk">Use Qanun online</a></div>
 </div></section>
 
 <section id="plans"><div class="wrap">
@@ -172,8 +160,8 @@
 </div></section>
 
 <section id="get" class="band"><div class="wrap">
-  <h2>Get Qanun</h2>
-  <p class="intro">Choose your device on the <a href="download.html">download page</a>. To buy a plan, write to us:</p>
+  <h2>Start with Qanun</h2>
+  <p class="intro"><a href="download.html">Download Qanun</a> for your device, or <a href="https://app.alqanun.pk">use it online</a>. To buy a plan, write to us:</p>
   <div class="btns">
     <a class="btn primary" href="https://wa.me/923341910206?text=Assalam%20Waalaikum%2C%20I%20would%20like%20to%20buy%20a%20Qanun%20Subscription">WhatsApp <small>+92 334 1910206</small></a>
     <a class="btn ghost" href="mailto:doctorkhanawais@gmail.com?subject=Qanun%20Subscription&amp;body=Assalam%20Waalaikum%2C%20I%20would%20like%20to%20buy%20a%20Qanun%20Subscription">Email <small>doctorkhanawais@gmail.com</small></a>
@@ -185,5 +173,28 @@
 </div></section>
 
 <footer><div class="in"><span>© 2026 Dr. Owais Nawaz Khan</span><a href="pricing.html">Pricing</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a><a href="mailto:doctorkhanawais@gmail.com">doctorkhanawais@gmail.com</a></div></footer>
+<script>
+// Hero slider (27 Nov 2026): one feature at a time, every 6 seconds; pauses while pointed at, touched or focused; arrows, dots
+// and swipe; no automatic movement for visitors who ask for reduced motion.
+(function () {
+  var root = document.querySelector('.hslider'); if (!root) return;
+  var slides = [].slice.call(root.querySelectorAll('.hslide')), dots = root.querySelector('.hdots'), at = 0, timer = null, paused = false;
+  var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  slides.forEach(function (s, i) { var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Show slide ' + (i + 1)); b.onclick = function () { go(i, true); }; dots.appendChild(b); });
+  function show() {
+    slides.forEach(function (s, i) { s.classList.toggle('on', i === at); s.classList.toggle('before', i < at); if (i === at) s.removeAttribute('aria-hidden'); else s.setAttribute('aria-hidden', 'true'); });
+    [].forEach.call(dots.children, function (d, i) { d.classList.toggle('on', i === at); d.setAttribute('aria-current', i === at ? 'true' : 'false'); });
+  }
+  function go(i, byHand) { at = (i + slides.length) % slides.length; show(); if (byHand) restart(); }
+  function restart() { clearInterval(timer); if (!calm) timer = setInterval(function () { if (!paused && !document.hidden) go(at + 1); }, 6000); }
+  [].forEach.call(root.querySelectorAll('.harrow'), function (b) { b.onclick = function () { go(at + Number(b.dataset.go), true); }; });
+  root.addEventListener('mouseenter', function () { paused = true; }); root.addEventListener('mouseleave', function () { paused = false; });
+  root.addEventListener('focusin', function () { paused = true; }); root.addEventListener('focusout', function () { paused = false; });
+  var x0 = null; root.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; paused = true; }, { passive: true });
+  root.addEventListener('touchend', function (e) { if (x0 !== null) { var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) go(at + (dx < 0 ? 1 : -1), true); } x0 = null; paused = false; }, { passive: true });
+  root.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') go(at + 1, true); if (e.key === 'ArrowLeft') go(at - 1, true); });
+  show(); restart();
+})();
+</script>
 </body>
 </html>

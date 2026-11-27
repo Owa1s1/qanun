@@ -178,8 +178,34 @@ header .menu svg { width: 26px; height: 26px; }
 @keyframes heroDrift1 { from { transform: translate(0, 0) scale(1); } to { transform: translate(160px, 90px) scale(1.15); } }
 @keyframes heroDrift2 { from { transform: translate(0, 0) scale(1); } to { transform: translate(-140px, -60px) scale(1.1); } }
 @keyframes heroRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-.hero h1, .hero p.lead, .hero .who, .hero .btns, .hero .vid { animation: heroRise .8s cubic-bezier(.2,.7,.2,1) both; }
-.hero p.lead { animation-delay: .15s; } .hero .who { animation-delay: .3s; } .hero .btns { animation-delay: .45s; } .hero .vid { animation-delay: .65s; animation-duration: 1s; }
+.hero .hslider, .hero .who, .hero .btns, .hero .vid { animation: heroRise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero .who { animation-delay: .3s; } .hero .btns { animation-delay: .45s; } .hero .vid { animation-delay: .65s; animation-duration: 1s; }
 @keyframes playPulse { 0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 0 0 0 rgba(255,255,255,.45); } 50% { box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 0 0 16px rgba(255,255,255,0); } }
 .vidplay { animation: playPulse 2.4s ease-in-out 1.6s infinite; }
-@media (prefers-reduced-motion: reduce) { .hero::before, .hero::after, .vidplay, .hero h1, .hero p.lead, .hero .who, .hero .btns, .hero .vid { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .hero::before, .hero::after, .vidplay, .hero .hslider, .hero .who, .hero .btns, .hero .vid { animation: none !important; } }
+
+/* 27 Nov 2026: menu button, hero slider, page heads for Subjects and Devices */
+header nav a.navcta { background: var(--gold); color: #1B1405; font-weight: 600; padding: 6px 14px; border-radius: 10px; margin: -6px 0; }
+header nav a.navcta:hover { color: #1B1405; filter: brightness(1.06); }
+@media (max-width: 760px) { header nav a.navcta { margin: 8px 0 4px; text-align: center; padding: 12px; border-top: 0; color: #1B1405; } }
+.hslider { position: relative; margin-bottom: 18px; }
+.hslides { display: grid; }
+.hslide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateX(48px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1), visibility 0s linear .6s; }
+.hslide.before { transform: translateX(-48px); }
+.hslide.on { opacity: 1; visibility: visible; transform: none; transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1), visibility 0s; }
+.hslide h1, .hslide h2 { font: 400 clamp(34px, 4.6vw, 54px)/1.12 'Libre Baskerville', Georgia, serif; margin: 0 0 16px; color: #fff; }
+.hero .hslide p.lead { margin: 0 0 6px; }
+.hpill { display: inline-block; margin-bottom: 14px; font-size: 13px; font-weight: 600; letter-spacing: .02em; padding: 4px 12px; border-radius: 99px; background: rgba(255,255,255,.12); color: var(--onDeep); }
+.hpill.soon { background: rgba(201,162,78,.22); color: #F2D79B; }
+.hnav { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+.harrow { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: transparent; color: #fff; font-size: 22px; line-height: 1; cursor: pointer; }
+.harrow:hover { background: rgba(255,255,255,.1); }
+.hdots { display: flex; gap: 7px; flex-wrap: wrap; }
+.hdots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 99px; background: rgba(255,255,255,.3); cursor: pointer; transition: width .3s, background .3s; }
+.hdots button.on { width: 24px; background: var(--gold); }
+.hero .hsmall { margin: 14px 0 0; font-size: 15px; } .hero .hsmall a { color: var(--onDeepSub); }
+.hero .hsmall a:hover { color: #fff; }
+.pagehero { background: radial-gradient(90% 120% at 15% 30%, #17505E 0%, var(--deep) 55%, var(--deep2) 100%); color: #fff; padding: 56px 0 48px; }
+.pagehero h1 { font: 400 clamp(32px, 4.6vw, 52px)/1.15 'Libre Baskerville', Georgia, serif; margin: 0 0 12px; }
+.pagehero p { color: var(--onDeep); font-size: 18px; max-width: 36em; margin: 0; }
+@media (prefers-reduced-motion: reduce) { .hslide, .hslide.on { transition: none; transform: none; } }
