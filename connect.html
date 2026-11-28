@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connect your Qanun app · Qanun</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20261127d">
+<style>
+  main { max-width: 560px; margin: 0 auto; padding: 40px 16px 60px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px; }
+  h1 { font: 400 28px/1.25 'Libre Baskerville', Georgia, serif; margin: 0 0 10px; }
+  .err { color: #B3402E; font-weight: 500; } .ok { color: #1F8A4C; font-weight: 600; }
+  .sub { color: var(--sub); } button.btn { border: 0; cursor: pointer; font-family: inherit; } button.btn:disabled { opacity: .5; }
+</style>
+</head>
+<body>
+<header><div class="in"><a class="brand" href="./"><img src="icon.png" alt=""><b>QANUN</b></a></div></header>
+<main><div class="card" id="box"><p class="sub">Loading…</p></div></main>
+<script type="module">
+// 27 Nov 2026: links the Windows or Android app to the person's Qanun account. The app opened this page with ?c=CODE;
+// after Google sign-in the page tells the Qanun server, and the app (which keeps asking with the same code) is connected.
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+const auth = getAuth(initializeApp({ apiKey: 'AIzaSyAmxejdARGVEwVWbQOaKRsh2EQG25aNPII', authDomain: 'qanun-f1a87.firebaseapp.com', projectId: 'qanun-f1a87', appId: '1:412268260572:web:ceeced8aa5457ac3805819' }));
+const box = document.getElementById('box');
+const code = new URLSearchParams(location.search).get('c') || sessionStorage.getItem('qanun_link') || '';
+if (code) sessionStorage.setItem('qanun_link', code);
+const el = (t, a = {}, ...k) => { const e = document.createElement(t); for (const [x, v] of Object.entries(a)) x.startsWith('on') ? e.addEventListener(x.slice(2), v) : e.setAttribute(x, v); e.append(...k); return e; };
+const show = (...k) => box.replaceChildren(...k);
+function start(msg) {
+  const b = el('button', { class: 'btn', type: 'button', onclick: async () => { b.disabled = true; try { await signInWithPopup(auth, new GoogleAuthProvider()); } catch (e) { if (e && (e.code === 'auth/popup-blocked' || e.code === 'auth/operation-not-supported-in-this-environment')) { sessionStorage.setItem('qanun_redirect', '1'); return signInWithRedirect(auth, new GoogleAuthProvider()); } b.disabled = false; if (!(e && e.code === 'auth/popup-closed-by-user')) start('Sign-in did not work. Please try again.'); } } }, 'Sign in with Google');
+  show(el('h1', {}, 'Connect your Qanun app'), el('p', {}, 'Sign in with the Google account you use for Qanun. Your app will then keep your progress in step with your other devices.'), msg ? el('p', { class: 'err' }, msg) : '', b);
+}
+async function link(user) {
+  show(el('h1', {}, 'Connecting…'), el('p', { class: 'sub' }, 'Signed in as ' + user.email + '.'));
+  let r, j = {};
+  try { r = await fetch('https://api.alqanun.pk/v1/link/complete', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + await user.getIdToken() }, body: JSON.stringify({ code }) }); j = await r.json().catch(() => ({})); }
+  catch { return show(el('h1', {}, 'Could not reach Qanun'), el('p', { class: 'err' }, 'Check the internet connection and reload this page.')); }
+  if (!r.ok) return show(el('h1', {}, 'Not connected'), el('p', { class: 'err' }, j.error || 'Something went wrong. Start again from the Qanun app.'), el('button', { class: 'btn', type: 'button', onclick: () => signOut(auth).then(() => start()) }, 'Use another Google account'));
+  sessionStorage.removeItem('qanun_link');
+  show(el('h1', {}, 'Connected'), el('p', { class: 'ok' }, (j.name || 'Your Qanun app') + ' is now connected to ' + user.email + '.'), el('p', {}, 'You can close this page and go back to Qanun. Your progress will start syncing in a moment.'));
+}
+if (!code) show(el('h1', {}, 'Open this from the Qanun app'), el('p', {}, 'In Qanun, go to Settings, Account and plan, and choose "Connect my Qanun account". This page then opens by itself.'));
+else { getRedirectResult(auth).catch(() => {}); let done = false; let clicked = false; box.addEventListener('click', () => { clicked = true; }, true);
+  onAuthStateChanged(auth, (u) => { if (done) return; if (!u) return start();
+    // signed in just now: connect; signed in from before: ask which account first
+    if (clicked || sessionStorage.getItem('qanun_redirect')) { done = true; sessionStorage.removeItem('qanun_redirect'); return link(u); }
+    show(el('h1', {}, 'Connect your Qanun app'), el('p', {}, 'Connect it to ' + u.email + '?'), el('div', { class: 'btns' }, el('button', { class: 'btn', type: 'button', onclick: () => { done = true; link(u); } }, 'Yes, connect'), el('button', { class: 'btn', type: 'button', onclick: () => signOut(auth) }, 'Use another Google account'))); }); }
+</script>
+</body>
+</html>

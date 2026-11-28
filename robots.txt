@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /reports.html
+Disallow: /connect.html
 Disallow: /*.before-
 
 Sitemap: https://alqanun.pk/sitemap.xml
