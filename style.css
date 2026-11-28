@@ -325,3 +325,12 @@ section .intro.center { margin-left: auto; margin-right: auto; }
 .about p { color: var(--sub); margin: 0 0 16px; max-width: 36em; }
 .about .aname { color: var(--text); }
 @media (max-width: 640px) { .about { flex-direction: column; text-align: center; gap: 18px; } .about .btns { justify-content: center; } }
+
+/* My account icon in the header (28 Nov 2026) */
+header .acct { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; color: var(--onDeepSub); border: 1.5px solid rgba(255,255,255,.28); flex: none; margin-left: 4px; }
+header .acct:hover { color: #fff; border-color: #fff; }
+header .acct svg { width: 20px; height: 20px; }
+@media (max-width: 760px) { header .acct { order: 1; margin-left: auto; } header .menu { order: 2; margin-left: 2px; } header nav { order: 3; } }
+header .acct { text-decoration: none; }
+header .acct.me { background: var(--accent); color: #fff; font-weight: 600; font-size: 16px; border-color: rgba(255,255,255,.55); overflow: hidden; }
+header .acct.me img { width: 100%; height: 100%; object-fit: cover; }

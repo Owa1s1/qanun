@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My account · Qanun</title>
+<meta name="description" content="Your Qanun account: your plan, your devices, and account deletion.">
+<link rel="canonical" href="https://alqanun.pk/account.html">
+<meta name="robots" content="noindex">
+<meta property="og:url" content="https://alqanun.pk/account.html">
+<meta property="og:site_name" content="Qanun">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://alqanun.pk/img/og.png">
+<link rel="icon" href="icon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20261128b">
+<style>
+  :root { --ok: #1F8A4C; --bad: #B3402E; }
+  @media (prefers-color-scheme: dark) { :root { --ok: #5CCB8A; --bad: #F08A78; } }
+  main { max-width: 720px; margin: 0 auto; padding: 26px 16px 60px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin-bottom: 16px; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 16px; }
+  button.btn { border: 0; cursor: pointer; font-family: inherit; }
+  button.btn:disabled { opacity: .45; cursor: not-allowed; }
+  .btn.plain { background: transparent; color: var(--ink); border: 1.5px solid var(--line); box-shadow: none; }
+  .lbl { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--sub); margin: 18px 0 6px; }
+  .note { color: var(--sub); font-size: 14px; }
+  .err { color: var(--bad); font-weight: 500; }
+  h1.serif { font-size: 28px; line-height: 1.2; margin: 4px 0 10px; }
+  .who { display: flex; gap: 14px; align-items: center; }
+  .who img, .who .av { width: 52px; height: 52px; border-radius: 50%; flex: none; }
+  .who .av { display: grid; place-items: center; background: var(--accent); color: #fff; font-weight: 600; font-size: 20px; }
+  .kv { display: grid; grid-template-columns: 130px 1fr; gap: 8px 14px; font-size: 15px; }
+  .kv dt { color: var(--sub); } .kv dd { margin: 0; }
+  .dev { padding: 8px 0; border-top: 1px solid var(--line); font-size: 15px; } .dev:first-child { border-top: 0; }
+  .danger { border-color: rgba(179,64,46,.35); }
+  .dadd { display: inline !important; margin: 0 !important; color: var(--sub); font-size: 14px; }
+  .dev { display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline; }
+  .btn.plain.del { color: var(--bad); border-color: rgba(179,64,46,.45); }
+  .who h1 { margin: 0 0 2px; }
+  button.link.unl { margin-left: auto; background: none; border: 0; color: var(--bad); font: inherit; font-size: 14px; cursor: pointer; padding: 0; }
+  .danger h2 { font-size: 18px; margin: 0 0 6px; }
+  @media (max-width: 520px) { .kv { grid-template-columns: 1fr; gap: 2px; } .kv dd { margin-bottom: 8px; } }
+</style>
+</head>
+<body>
+<header><div class="in">
+  <a class="brand" href="./"><img src="icon.png" alt=""><b>QANUN</b></a>
+  <button class="menu" aria-label="Menu" aria-expanded="false" onclick="var h=this.closest('header'),o=h.classList.toggle('open');this.setAttribute('aria-expanded',o)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <nav onclick="if(event.target.tagName==='A')this.closest('header').classList.remove('open')"><a href="./">Home</a><a href="mcqs/">Free MCQs</a><a href="pricing.html">Pricing</a><a href="https://app.alqanun.pk">Use online</a><a href="download.html" class="navcta">Download Qanun</a></nav>
+  <a class="acct" href="account.html" aria-label="My account" title="My account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></a><script src="acct.js?v=1" defer></script>
+</div></header>
+<main><div id="app"><p class="note">Loading…</p></div></main>
+<footer><div class="in"><span>© 2026 Dr. Owais Nawaz Khan</span><a href="pricing.html">Pricing</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a><a href="mailto:support@alqanun.pk">support@alqanun.pk</a></div></footer>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, deleteUser, reauthenticateWithPopup } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+
+const API = 'https://api.alqanun.pk';
+const auth = getAuth(initializeApp({
+  apiKey: 'AIzaSyAmxejdARGVEwVWbQOaKRsh2EQG25aNPII', authDomain: 'qanun-f1a87.firebaseapp.com', projectId: 'qanun-f1a87',
+  storageBucket: 'qanun-f1a87.firebasestorage.app', messagingSenderId: '412268260572', appId: '1:412268260572:web:ceeced8aa5457ac3805819'
+}));
+
+const root = document.getElementById('app');
+const WA = 'https://wa.me/923341910206?text=' + encodeURIComponent('Assalam Waalaikum, I have a question about my Qanun account');
+function h(tag, props, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(props || {})) {
+    if (k === 'class') e.className = v; else if (k.startsWith('on')) e.addEventListener(k.slice(2), v); else if (v !== false && v != null) e.setAttribute(k, v);
+  }
+  for (const c of kids.flat()) { if (c == null || c === false) continue; e.append(c.nodeType ? c : document.createTextNode(String(c))); }
+  return e;
+}
+const show = (...nodes) => { root.replaceChildren(...nodes); window.scrollTo(0, 0); };
+const btn = (label, onclick, cls = 'primary') => h('button', { class: 'btn ' + cls, type: 'button', onclick }, label);
+
+// A random id kept in this browser. The server counts the free questions per ACCOUNT for browsers, so clearing it gains nothing.
+let memId = null;
+function deviceId() {
+  let id = memId; try { id = id || localStorage.getItem('qanun_web_dev'); } catch {}
+  if (!id || id.length < 16) {
+    const a = new Uint8Array(20); crypto.getRandomValues(a);
+    id = [...a].map((x) => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[x % 36]).join('');
+    try { localStorage.setItem('qanun_web_dev', id); } catch {}
+  }
+  return (memId = id);
+}
+async function call(path, body) {
+  const token = await auth.currentUser.getIdToken();
+  // A brand-new browser's first request can fail before the server answers; trying again a moment later works, so do it quietly.
+  let r;
+  for (let tries = 0; tries < 3 && !r; tries++) {
+    try { r = await fetch(API + path, { method: 'POST', headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' }, body: JSON.stringify({ deviceId: deviceId(), ...body }) }); }
+    catch { if (tries < 2) await new Promise((ok) => setTimeout(ok, 700 * (tries + 1))); }
+  }
+  if (!r) return { status: 0, error: 'Could not reach Qanun (' + path.replace('/v1/', '') + '). Check your internet connection and try again.' };
+  let j = {}; try { j = await r.json(); } catch {}
+  return { status: r.status, ...j };
+}
+
+
+async function getMe() {
+  const token = await auth.currentUser.getIdToken(); let r;
+  for (let t = 0; t < 3 && !r; t++) { try { r = await fetch(API + '/v1/me', { headers: { authorization: 'Bearer ' + token } }); } catch { if (t < 2) await new Promise((ok) => setTimeout(ok, 700 * (t + 1))); } }
+  if (!r) return { status: 0, error: 'Could not reach alqanun.pk. Check your internet connection and try again.' };
+  let j = {}; try { j = await r.json(); } catch {} return { status: r.status, ...j };
+}
+const PLAN = { free: 'Free', trial: 'Free', student: 'Student', clinician: 'Clinician' };
+const KIND = { phone: 'Phone', tablet: 'Tablet', computer: 'Computer', web: 'Web browser', android: 'Android phone or tablet', windows: 'Windows computer', ios: 'iPhone or iPad', mac: 'Mac' };
+const fmt = (d) => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); };
+const wantsDelete = () => location.hash === '#delete-account';
+function signInScreen(message) {
+  show(h('div', { class: 'card' },
+    h('h1', { class: 'serif' }, wantsDelete() ? 'Delete your Qanun account' : 'My account'),
+    h('p', {}, wantsDelete() ? 'Sign in with the Google account you use in Qanun. You will be asked to confirm before anything is deleted.' : 'Sign in with the Google account you use in Qanun to see your plan and your devices.'),
+    message ? h('p', { class: 'err' }, message) : null,
+    h('div', { class: 'row' }, btn('Sign in with Google', async () => {
+      try { await signInWithPopup(auth, new GoogleAuthProvider()); }
+      catch (e) { if (e && e.code === 'auth/popup-closed-by-user') return;
+        signInScreen(e && e.code === 'auth/popup-blocked' ? 'Your browser blocked the sign-in window. Allow pop-ups for this site and try again.' : 'Sign-in did not work. Please try again.'); }
+    }))));
+}
+function remember(u) { try { if (u) localStorage.setItem('qanun_acct', JSON.stringify({ i: (u.displayName || u.email || '?').trim()[0].toUpperCase(), p: u.photoURL || '' })); else localStorage.removeItem('qanun_acct'); } catch {} paintIcon(); }
+function paintIcon() { const a = document.querySelector('header .acct'); if (a && window.qanunAcctIcon) window.qanunAcctIcon(a); }
+async function apiGet(path) { const token = await auth.currentUser.getIdToken(); try { const r = await fetch(API + path, { headers: { authorization: 'Bearer ' + token } }); let j = {}; try { j = await r.json(); } catch {} return { status: r.status, ...j }; } catch { return { status: 0 }; } }
+async function apiPost(path, body) { const token = await auth.currentUser.getIdToken(); try { const r = await fetch(API + path, { method: 'POST', headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' }, body: JSON.stringify(body || {}) }); let j = {}; try { j = await r.json(); } catch {} return { status: r.status, ...j }; } catch { return { status: 0 }; } }
+const ago = (t) => { if (!t) return ''; const d = Math.round((Date.now() - t) / 864e5); return d <= 0 ? 'today' : d === 1 ? 'yesterday' : d + ' days ago'; };
+function syncCard() {
+  const box = h('div', {}, h('p', { class: 'note' }, 'Loading…'));
+  const draw = async () => {
+    const r = await apiGet('/v1/sync/links');
+    if (r.status !== 200) return box.replaceChildren(h('p', { class: 'note' }, 'Could not load your linked apps just now.'));
+    box.replaceChildren(
+      (r.links || []).length ? h('div', {}, ...r.links.map((l) => h('div', { class: 'dev' }, h('span', {}, l.name), h('span', { class: 'dadd' }, ' · last synced ' + ago(l.seen)),
+        h('button', { class: 'link unl', type: 'button', onclick: async (e) => { if (!confirm('Unlink ' + l.name + '? Its progress stays on that device, but it stops syncing until you connect it again.')) return; e.target.disabled = true; await apiPost('/v1/sync/unlink', { id: l.id }); draw(); } }, 'Unlink'))))
+        : h('p', { class: 'note' }, 'No apps linked yet.'),
+      h('p', { class: 'note', style: 'margin-top:10px' }, r.items ? `${r.items.toLocaleString()} saved answers, cards and settings are kept in step${r.last ? ', last change ' + ago(r.last) : ''}. The Qanun web app syncs automatically when you sign in.` : 'The Qanun web app syncs automatically when you sign in.'),
+      h('p', { class: 'note' }, 'To add your phone or computer: open Qanun there, tap the account icon, then Progress on every device, Connect.'));
+  };
+  draw(); return h('div', {}, h('div', { class: 'lbl' }, 'Progress on every device'), box);
+}
+async function accountScreen() {
+  show(h('div', { class: 'card' }, h('p', { class: 'note' }, 'Loading your account…')));
+  const u = auth.currentUser; remember(u); const me = await getMe();
+  if (me.status === 401) return signInScreen('Please sign in again.');
+  const name = u.displayName || ''; const pic = u.photoURL;
+  const planName = PLAN[me.plan] || (me.plan ? me.plan[0].toUpperCase() + me.plan.slice(1) : 'Free');
+  const paid = me.plan && !['free', 'trial'].includes(me.plan);
+  show(
+    h('div', { class: 'card' },
+      h('div', { class: 'who' }, pic ? h('img', { src: pic, alt: '', referrerpolicy: 'no-referrer' }) : h('div', { class: 'av' }, (name || u.email || '?')[0].toUpperCase()),
+        h('div', {}, h('h1', { class: 'serif', style: 'margin:0' }, name || 'My account'), h('div', { class: 'note' }, u.email || ''))),
+      me.status !== 200 ? h('p', { class: 'err' }, me.error || 'Your account details could not be loaded. Please try again.') : null,
+      h('div', { class: 'lbl' }, 'Subscription'),
+      h('dl', { class: 'kv' }, h('dt', {}, 'Plan'), h('dd', {}, h('b', {}, planName)),
+        paid && me.expires ? [h('dt', {}, 'Renews or ends'), h('dd', {}, fmt(me.expires))] : null),
+      h('p', { class: 'note' }, paid ? 'Plans bought on Google Play are managed in the Google Play app (Profile, Payments and subscriptions).' : 'If you bought a plan by WhatsApp or email, your licence key is shown in the app under Plans.'),
+      h('div', { class: 'lbl' }, 'Devices with your plan'),
+      (me.devices || []).length ? h('div', {}, ...me.devices.map((d) => h('div', { class: 'dev' }, KIND[d.kind] || d.kind || 'Device', d.added ? h('span', { class: 'dadd' }, ' · added ' + fmt(d.added)) : null)))
+        : h('p', { class: 'note' }, 'None yet. Sign in inside the Qanun app to add one.'),
+      syncCard(),
+      h('div', { class: 'row' }, h('a', { class: 'btn primary', href: 'https://app.alqanun.pk' }, 'Open Qanun'), h('a', { class: 'btn plain', href: 'pricing.html' }, paid ? 'Plans' : 'See plans'), h('a', { class: 'btn plain', href: WA }, 'Help on WhatsApp'), btn('Sign out', () => signOut(auth), 'plain'))),
+    h('div', { class: 'card danger' }, h('h2', {}, 'Delete my account'),
+      h('p', { class: 'note', style: 'margin:0' }, 'Permanently removes your Qanun account and its records from our server.'),
+      h('div', { class: 'row', style: 'margin-top:12px' }, btn('Delete my account', () => { history.replaceState(null, '', '#delete-account'); deleteScreen(); }, 'plain del'))));
+}
+function deleteScreen(message) {
+  const box = h('input', { type: 'text', placeholder: 'DELETE', autocomplete: 'off', 'aria-label': 'Type DELETE to confirm', style: 'font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);width:min(260px,100%)' });
+  const msg = h('p', { class: 'err' }, message || '');
+  const go = btn('Delete my account', async () => {
+    if (box.value.trim().toUpperCase() !== 'DELETE') { msg.textContent = 'Type DELETE in the box to confirm.'; return; }
+    go.disabled = true; go.textContent = 'Deleting…';
+    const r = await call('/v1/me/delete', { confirm: 'DELETE' });
+    if (r.status !== 200) { go.disabled = false; go.textContent = 'Delete my account'; msg.textContent = r.error || 'Could not delete the account. Try again.'; return; }
+    try { await deleteUser(auth.currentUser); }
+    catch (e) {
+      if (e && e.code === 'auth/requires-recent-login') { try { await reauthenticateWithPopup(auth.currentUser, new GoogleAuthProvider()); await deleteUser(auth.currentUser); } catch { try { await signOut(auth); } catch {} } }
+      else { try { await signOut(auth); } catch {} }
+    }
+    deletedScreen();
+  }, 'primary');
+  go.style.background = 'var(--bad)'; go.style.color = '#fff';
+  show(h('div', { class: 'card' },
+    h('h1', { class: 'serif' }, 'Delete your Qanun account'),
+    h('p', {}, 'Signed in as ', h('b', {}, (auth.currentUser && auth.currentUser.email) || 'your Google account'), '.'),
+    h('p', {}, 'This permanently deletes your Qanun account from our server: your email and name, your registered devices, your plan, your usage counts, your Google Play purchase records and the free questions you were given. It cannot be undone. Payment records we must keep by law, and a daily count of free questions per device (no personal details), are kept.'),
+    h('p', {}, h('b', {}, 'Deleting your account does not cancel a Google Play subscription.'), ' Cancel it first in the Google Play app (Profile, Payments and subscriptions, Subscriptions). Any time left on a plan is lost.'),
+    h('p', {}, 'Your books, notes and study work saved on your own devices are not on our server. Remove them in the app (Settings, Privacy and data, Delete my data) or by uninstalling it.'),
+    h('div', { class: 'lbl' }, 'Type DELETE to confirm'), box, msg,
+    h('div', { class: 'row' }, go, btn('Cancel', () => { history.replaceState(null, '', location.pathname); accountScreen(); }, 'plain'))));
+}
+function deletedScreen() {
+  history.replaceState(null, '', location.pathname);
+  show(h('div', { class: 'card' }, h('h1', { class: 'serif' }, 'Your account has been deleted'),
+    h('p', {}, 'Your Qanun account and its records have been removed from our server. Thank you for trying Qanun.'),
+    h('p', { class: 'note' }, 'Questions? Write to ', h('a', { href: 'mailto:support@alqanun.pk' }, 'support@alqanun.pk'), '.'),
+    h('div', { class: 'row' }, h('a', { class: 'btn primary', href: './' }, 'Back to Qanun'))));
+}
+window.addEventListener('hashchange', () => { if (!auth.currentUser) return signInScreen(); if (wantsDelete()) deleteScreen(); else accountScreen(); });
+onAuthStateChanged(auth, (u) => { if (!u) { remember(null); return signInScreen(); } else if (wantsDelete()) deleteScreen(); else accountScreen(); });
+</script>
+</body>
+</html>
