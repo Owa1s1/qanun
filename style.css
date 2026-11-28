@@ -315,3 +315,13 @@ section .intro.center { margin-left: auto; margin-right: auto; }
 @media (max-width: 620px) { .mcqlist { grid-template-columns: 1fr; } }
 .mcqlist li { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
 .mcqlist a { font-weight: 600; color: var(--ink); text-decoration: none; } .mcqlist span { color: var(--sub); font-size: 14px; white-space: nowrap; }
+
+/* "Made by a doctor" */
+.about { display: flex; gap: 36px; align-items: center; max-width: 860px; margin: 0 auto; }
+.about img { width: 168px; height: 168px; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 4px var(--card), 0 0 0 5px var(--line); }
+.about h2 { margin-bottom: 6px; }
+.about .aname { font-weight: 700; margin: 0 0 10px; }
+.about .aname span { display: block; font-weight: 400; color: var(--sub); font-size: 15px; }
+.about p { color: var(--sub); margin: 0 0 16px; max-width: 36em; }
+.about .aname { color: var(--text); }
+@media (max-width: 640px) { .about { flex-direction: column; text-align: center; gap: 18px; } .about .btns { justify-content: center; } }
